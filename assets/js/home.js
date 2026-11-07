@@ -94,7 +94,8 @@ appListEl.addEventListener('click', (e) => {
   if (getBtn) {
     e.stopPropagation();
     const id = Number(getBtn.dataset.get);
-    const app = state.list.find((a) => a.id === id);
+    // SQLite 返回的 id 为字符串，需显式转数字再比较，否则严格相等会失配
+    const app = state.list.find((a) => Number(a.id) === id);
     if (app) startDownload(app);
     return;
   }
