@@ -3,4 +3,4 @@
  * 改成你宝塔后端的域名（不要加末尾斜杠）
  * 例：https://api.yourdomain.com
  * ============================================================ */
-window.API_BASE = 'https://ipa.puaaa.cn';
+window.API_BASE = 'http://ipa.puaaa.cn';
