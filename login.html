@@ -3,21 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>登录 / 注册 · IPA 应用库</title>
+<title>登录 / 注册 - IPA 应用库</title>
+<meta name="description" content="登录或注册 IPA 应用库，兑换授权码、下载 iOS IPA 应用，管理你的下载记录与授权码。">
+<meta name="keywords" content="IPA应用库登录,IPA下载注册,用户登录,授权码兑换,苹果软件下载账号">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://iosyyds.github.io/ipa-store/login.html">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<meta name="theme-color" content="#0a84ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="IPA应用库">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IPA 应用库">
+<meta property="og:title" content="登录 / 注册 - IPA 应用库">
+<meta property="og:description" content="登录或注册后兑换授权码、下载 iOS IPA 应用。">
+<meta property="og:url" content="https://iosyyds.github.io/ipa-store/login.html">
+<meta property="og:locale" content="zh_CN">
 <link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .seg { display:flex; background:rgba(0,0,0,.06); border-radius:10px; padding:3px; margin-bottom:22px; }
-  .seg button { flex:1; padding:8px; border-radius:8px; font-size:13px; font-weight:600; color:var(--text-2); }
-  .seg button.active { background:#fff; color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.12); }
-  .login-card { padding:32px 30px; }
-</style>
 </head>
 <body>
+<nav class="navbar">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="mark"><img src="assets/favicon.svg" alt="IPA 应用库"></span>
+      <span>IPA 应用库</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="login.html" id="userEntry">登录</a>
+    </div>
+  </div>
+</nav>
+
 <div class="login-wrap">
   <div class="login-card">
-    <div class="login-logo" style="width:56px;height:56px;margin-bottom:14px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </div>
+    <div class="login-logo"><img src="assets/favicon.svg" alt="IPA 应用库"></div>
     <h1 id="cardTitle">欢迎回来</h1>
     <p id="cardSub">登录后下载应用、管理授权码</p>
 
@@ -26,7 +48,6 @@
       <button id="tabReg" type="button">注册</button>
     </div>
 
-    <!-- 登录表单 -->
     <form id="loginForm">
       <div class="field"><label>账号 / 邮箱</label>
         <input class="input" id="loginAccount" autocomplete="username" required></div>
@@ -35,7 +56,6 @@
       <button class="btn btn-primary btn-block" type="submit" id="loginBtn">登 录</button>
     </form>
 
-    <!-- 注册表单 -->
     <form id="regForm" hidden>
       <div class="field"><label>用户名（3-20 位）</label>
         <input class="input" id="regName" autocomplete="username" required></div>
@@ -49,6 +69,18 @@
     </form>
   </div>
 </div>
+
+<nav class="tabbar">
+  <a class="tab-item" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
+    首页</a>
+  <a class="tab-item" href="index.html#chips">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    分类</a>
+  <a class="tab-item active" href="user.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+    我的</a>
+</nav>
 
 <script src="assets/js/config.js"></script>
 <script src="assets/js/api.js"></script>

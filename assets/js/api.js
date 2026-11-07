@@ -1,6 +1,7 @@
 /* 前台 API 封装 */
 (function () {
-  const BASE = window.API_BASE;
+  const ORIGIN = window.API_BASE;          // 只填域名，如 https://api.xxx.com
+  const BASE = ORIGIN + '/api';            // 接口统一前缀
 
   async function request(path, options = {}) {
     const headers = { 'Content-Type': 'application/json' };
@@ -29,7 +30,7 @@
     app: (id) => request(`/apps/${id}`),
     register: (body) => request('/register', { method: 'POST', body }),
     login: (body) => request('/login', { method: 'POST', body }),
-    fileUrl: (p) => BASE + p,
+    fileUrl: (p) => ORIGIN + p,
 
     // 用户（需登录）
     user: {

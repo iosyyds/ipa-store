@@ -1,0 +1,20 @@
+{
+  "name": "IPA 应用库 - iOS 应用下载",
+  "short_name": "IPA应用库",
+  "description": "精选 iOS IPA 应用下载，企业签名一键安装，安全可靠。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f5f7",
+  "theme_color": "#0a84ff",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

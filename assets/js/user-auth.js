@@ -45,12 +45,18 @@ function userLogout() {
 // 自动渲染导航栏用户入口
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('userEntry');
-  if (!el) return;
-  if (isLoggedIn()) {
-    el.href = 'user.html';
-    el.textContent = getUserName();
-  } else {
-    el.href = 'login.html';
-    el.textContent = '登录';
+  if (el) {
+    if (isLoggedIn()) {
+      el.href = 'user.html';
+      el.textContent = getUserName();
+    } else {
+      el.href = 'login.html';
+      el.textContent = '登录';
+    }
+  }
+  // 底部“我的”Tab：未登录时跳登录页
+  const tabMe = document.getElementById('tabMe');
+  if (tabMe && !isLoggedIn()) {
+    tabMe.href = 'login.html?redirect=user.html';
   }
 });
