@@ -30,9 +30,11 @@ async function render() {
       <!-- 资料 -->
       <div class="card">
         <div class="profile-head">
-          <div class="profile-avatar">${esc(profile.username[0].toUpperCase())}</div>
+          <img class="profile-avatar" style="object-fit:cover" alt="头像"
+            src="${esc(profile.avatar ? API.fileUrl(profile.avatar) : 'assets/default-avatar.svg')}">
           <div style="flex:1;min-width:0">
-            <h3 style="font-size:18px">${esc(profile.username)}</h3>
+            <h3 style="font-size:18px">${esc(profile.nickname || profile.username)}</h3>
+            <div class="muted" style="font-size:13px">UID ${esc(profile.uid)} · ${esc(profile.username)}</div>
             <div class="muted" style="font-size:13px">${esc(profile.email)}</div>
             <div class="muted" style="font-size:12px;margin-top:2px">注册于 ${esc(profile.created_at)}</div>
           </div>

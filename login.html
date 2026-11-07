@@ -58,8 +58,10 @@
     </form>
 
     <form id="regForm" hidden>
-      <div class="field"><label>用户名（3-20 位）</label>
-        <input class="input" id="regName" autocomplete="username" required></div>
+      <div class="field"><label>用户名（3-10 位字母或数字）</label>
+        <input class="input" id="regName" autocomplete="username" pattern="[A-Za-z0-9]{3,10}" required></div>
+      <div class="field"><label>昵称（选填，不填则用用户名）</label>
+        <input class="input" id="regNick" autocomplete="nickname" maxlength="12"></div>
       <div class="field"><label>邮箱</label>
         <input class="input" id="regEmail" type="email" autocomplete="email" required></div>
       <div class="field"><label>密码（至少 6 位）</label>
@@ -126,6 +128,9 @@ loginForm.addEventListener('submit', async (e) => {
 
 regForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  if (!/^[A-Za-z0-9]{3,10}$/.test(name))
+    return toast('用户名需 3-10 位字母或数字', 'error');
   const p1 = document.getElementById('regPass').value;
   if (p1 !== document.getElementById('regPass2').value)
     return toast('两次输入的密码不一致', 'error');
@@ -133,7 +138,8 @@ regForm.addEventListener('submit', async (e) => {
   btn.disabled = true; btn.textContent = '注册中…';
   try {
     await doRegister({
-      username: document.getElementById('regName').value.trim(),
+      username: name,
+      nickname: document.getElementById('regNick').value.trim(),
       email: document.getElementById('regEmail').value.trim(),
       password: p1,
     });
