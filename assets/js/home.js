@@ -133,10 +133,11 @@ async function initChips() {
 (async function init() {
   try {
     const settings = await API.settings();
-    document.getElementById('navName').textContent = settings.site_name || 'IPA 应用库';
-    document.getElementById('heroTitle').textContent = settings.site_name || 'IPA 应用库';
+    const siteName = settings.site_name || '甜甜-IPA应用库';
+    document.getElementById('navName').textContent = siteName;
+    // Hero 大标题保持营销语“发现优质 iOS 应用”，不与导航栏品牌名重复
     document.getElementById('heroSlogan').textContent = settings.site_slogan || '';
-    document.title = `${settings.site_name || 'IPA 应用库'} · iOS 应用下载`;
+    document.title = `${siteName} - iOS 应用下载`;
     if (settings.notice) {
       document.getElementById('noticeSlot').innerHTML =
         `<div class="notice-bar">

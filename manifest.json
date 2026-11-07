@@ -1,7 +1,7 @@
 {
-  "name": "IPA 应用库 - iOS 应用下载",
-  "short_name": "IPA应用库",
-  "description": "精选 iOS IPA 应用下载，企业签名一键安装，安全可靠。",
+  "name": "甜甜-IPA应用库 - iOS 应用下载",
+  "short_name": "甜甜",
+  "description": "甜甜-IPA应用库：精选 iOS IPA 应用下载，企业签名一键安装，安全可靠。",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

@@ -23,7 +23,7 @@ function setMeta(name, content, attr = 'name') {
 }
 
 function updateSeo(app) {
-  const pageTitle = `${app.name} ${app.version} 下载 - IPA 应用库`;
+  const pageTitle = `${app.name} ${app.version} 下载 - 甜甜-IPA应用库`;
   const desc = app.short_desc || `下载 ${app.name} ${app.version}，适用于 iPhone、iPad，企业签名一键安装。`;
   document.title = pageTitle;
   setMeta('description', desc);
