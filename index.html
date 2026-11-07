@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>IPA 应用库 · iOS 应用下载</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="mark">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 2.4-1.5 3.8-1.5 6A2.5 2.5 0 0 0 6 17.5h12a2.5 2.5 0 0 0 2.5-2.5c0-2.2-1.5-3.6-1.5-6a7 7 0 0 0-7-7z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+      </span>
+      <span id="navName">IPA 应用库</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="#apps">全部应用</a>
+      <a href="login.html" id="userEntry">登录</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="noticeSlot"></div>
+  <header class="hero">
+    <h1 id="heroTitle">发现优质 iOS 应用</h1>
+    <p id="heroSlogan">精选应用，安全下载</p>
+    <div class="search-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input class="search-input" id="searchInput" placeholder="搜索应用名称…" enterkeyhint="search">
+    </div>
+  </header>
+</div>
+
+<div class="chips" id="chips"></div>
+
+<div class="container" id="apps">
+  <div class="section-head">
+    <h2 id="listTitle">全部应用</h2>
+    <span id="countText"></span>
+  </div>
+  <div class="app-list" id="appList">
+    <div class="empty">加载中…</div>
+  </div>
+  <div class="load-more" id="loadMoreSlot"></div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/user-auth.js"></script>
+<script src="assets/js/download.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>登录 / 注册 · IPA 应用库</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .seg { display:flex; background:rgba(0,0,0,.06); border-radius:10px; padding:3px; margin-bottom:22px; }
+  .seg button { flex:1; padding:8px; border-radius:8px; font-size:13px; font-weight:600; color:var(--text-2); }
+  .seg button.active { background:#fff; color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.12); }
+  .login-card { padding:32px 30px; }
+</style>
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo" style="width:56px;height:56px;margin-bottom:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h1 id="cardTitle">欢迎回来</h1>
+    <p id="cardSub">登录后下载应用、管理授权码</p>
+
+    <div class="seg">
+      <button id="tabLogin" class="active" type="button">登录</button>
+      <button id="tabReg" type="button">注册</button>
+    </div>
+
+    <!-- 登录表单 -->
+    <form id="loginForm">
+      <div class="field"><label>账号 / 邮箱</label>
+        <input class="input" id="loginAccount" autocomplete="username" required></div>
+      <div class="field"><label>密码</label>
+        <input class="input" id="loginPass" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn-primary btn-block" type="submit" id="loginBtn">登 录</button>
+    </form>
+
+    <!-- 注册表单 -->
+    <form id="regForm" hidden>
+      <div class="field"><label>用户名（3-20 位）</label>
+        <input class="input" id="regName" autocomplete="username" required></div>
+      <div class="field"><label>邮箱</label>
+        <input class="input" id="regEmail" type="email" autocomplete="email" required></div>
+      <div class="field"><label>密码（至少 6 位）</label>
+        <input class="input" id="regPass" type="password" autocomplete="new-password" required></div>
+      <div class="field"><label>确认密码</label>
+        <input class="input" id="regPass2" type="password" autocomplete="new-password" required></div>
+      <button class="btn btn-primary btn-block" type="submit" id="regBtn">注 册</button>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/user-auth.js"></script>
+<script>
+const back = new URLSearchParams(location.search).get('redirect') || 'index.html';
+const tabLogin = document.getElementById('tabLogin');
+const tabReg = document.getElementById('tabReg');
+const loginForm = document.getElementById('loginForm');
+const regForm = document.getElementById('regForm');
+
+function showLogin() {
+  tabLogin.classList.add('active'); tabReg.classList.remove('active');
+  loginForm.hidden = false; regForm.hidden = true;
+  document.getElementById('cardTitle').textContent = '欢迎回来';
+  document.getElementById('cardSub').textContent = '登录后下载应用、管理授权码';
+}
+function showReg() {
+  tabReg.classList.add('active'); tabLogin.classList.remove('active');
+  regForm.hidden = false; loginForm.hidden = true;
+  document.getElementById('cardTitle').textContent = '创建账号';
+  document.getElementById('cardSub').textContent = '注册即可兑换授权码、下载应用';
+}
+tabLogin.addEventListener('click', showLogin);
+tabReg.addEventListener('click', showReg);
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.textContent = '登录中…';
+  try {
+    await doLogin({
+      account: document.getElementById('loginAccount').value.trim(),
+      password: document.getElementById('loginPass').value,
+    });
+    location.href = back;
+  } catch (err) {
+    toast(err.message, 'error');
+    btn.disabled = false; btn.textContent = '登 录';
+  }
+});
+
+regForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const p1 = document.getElementById('regPass').value;
+  if (p1 !== document.getElementById('regPass2').value)
+    return toast('两次输入的密码不一致', 'error');
+  const btn = document.getElementById('regBtn');
+  btn.disabled = true; btn.textContent = '注册中…';
+  try {
+    await doRegister({
+      username: document.getElementById('regName').value.trim(),
+      email: document.getElementById('regEmail').value.trim(),
+      password: p1,
+    });
+    location.href = back;
+  } catch (err) {
+    toast(err.message, 'error');
+    btn.disabled = false; btn.textContent = '注 册';
+  }
+});
+</script>
+</body>
+</html>
