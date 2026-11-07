@@ -24,7 +24,7 @@ function promptLogin() {
   const mask = document.createElement('div');
   mask.className = 'mask';
   mask.innerHTML = `
-    <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet">
       <div class="sheet-head">
         <h3>请先登录</h3>
         <p>登录后即可获取该应用，授权码与下载记录会自动保存到你的账号</p>
@@ -36,7 +36,6 @@ function promptLogin() {
     </div>`;
   document.body.appendChild(mask);
   const close = () => mask.remove();
-  mask.addEventListener('click', close);
   mask.querySelector('#loginCancel').addEventListener('click', close);
   mask.querySelector('#goLogin').addEventListener('click', () => {
     location.href = `login.html?redirect=${encodeURIComponent(back || 'index.html')}`;
@@ -66,7 +65,7 @@ function handleToken(data) {
     const mask = document.createElement('div');
     mask.className = 'mask';
     mask.innerHTML = `
-      <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet">
         <div class="sheet-head"><h3>选择方式</h3><p>建议使用「直接安装」</p></div>
         <div class="sheet-foot" style="flex-direction:column">
           <button class="primary" style="border:none;border-bottom:1px solid var(--line)" id="actInstall">直接安装（企业签名）</button>
@@ -76,7 +75,6 @@ function handleToken(data) {
       </div>`;
     document.body.appendChild(mask);
     const close = () => mask.remove();
-    mask.addEventListener('click', close);
     mask.querySelector('#actCancel').addEventListener('click', close);
     mask.querySelector('#actInstall').addEventListener('click', () => {
       close();
