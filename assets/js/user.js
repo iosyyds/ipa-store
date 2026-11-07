@@ -30,13 +30,24 @@ async function render() {
       <!-- 资料 -->
       <div class="card">
         <div class="profile-head">
-          <img class="profile-avatar" style="object-fit:cover" alt="头像"
+          <img class="profile-avatar" alt="头像"
             src="${esc(profile.avatar ? API.fileUrl(profile.avatar) : 'assets/default-avatar.svg')}">
-          <div style="flex:1;min-width:0">
-            <h3 style="font-size:18px">${esc(profile.nickname || profile.username)}</h3>
-            <div class="muted" style="font-size:13px">UID ${esc(profile.uid)} · ${esc(profile.username)}</div>
-            <div class="muted" style="font-size:13px">${esc(profile.email)}</div>
-            <div class="muted" style="font-size:12px;margin-top:2px">注册于 ${esc(profile.created_at)}</div>
+          <div class="profile-id">
+            <h3 class="profile-name">${esc(profile.nickname || profile.username)}</h3>
+            <div class="profile-badges">
+              <span class="uid-pill">ID ${esc(profile.uid)}</span>
+              <span class="uname">@${esc(profile.username)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="profile-rows">
+          <div class="profile-row">
+            <svg class="pr-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 1.6 7.6 5.4 7.6-5.4H4.4zM4 8.2V17.4h16V8.2l-8 5.7-8-5.7z"/></svg>
+            <span class="pr-text">${esc(profile.email || '未绑定邮箱')}</span>
+          </div>
+          <div class="profile-row">
+            <svg class="pr-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zM5 9v10h14V9H5z"/></svg>
+            <span class="pr-text">注册于 ${esc(profile.created_at)}</span>
           </div>
         </div>
         <div style="margin-top:16px;display:flex;gap:10px">
