@@ -30,7 +30,8 @@
     app: (id) => request(`/apps/${id}`),
     register: (body) => request('/register', { method: 'POST', body }),
     login: (body) => request('/login', { method: 'POST', body }),
-    fileUrl: (p) => ORIGIN + p,
+    // 外部链接直接返回，本地路径（/uploads/...）拼接后端域名
+    fileUrl: (p) => (/^https?:\/\//i.test(p) ? p : ORIGIN + p),
 
     // 用户（需登录）
     user: {
