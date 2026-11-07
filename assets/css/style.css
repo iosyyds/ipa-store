@@ -34,7 +34,8 @@ body {
 a { color: var(--blue); text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 img { display: block; max-width: 100%; }
-input, textarea, select { font-family: inherit; font-size: 15px; }
+/* 输入控件字体必须 ≥16px，否则 iOS Safari 聚焦会自动放大页面 */
+input, textarea, select { font-family: inherit; font-size: 16px; }
 .container { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 16px; }
 
 /* ============ 顶部导航 ============ */
