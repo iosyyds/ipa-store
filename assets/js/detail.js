@@ -119,4 +119,10 @@ async function render() {
   dockBtn.addEventListener('click', () => startDownload(app));
 }
 
+document.getElementById('backFab').addEventListener('click', () => {
+  // 有上一页则返回，否则回首页
+  if (document.referrer && history.length > 1) history.back();
+  else location.href = 'index.html';
+});
+
 render();

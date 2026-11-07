@@ -76,14 +76,14 @@ async function render() {
       <!-- 我的授权码 -->
       <div class="card" style="padding:0">
         <div style="padding:16px 18px"><h3 style="font-size:16px">我的授权码（${licenses.length}）</h3></div>
-        <div class="table-wrap"><table>
+        <div class="table-wrap"><table class="resp-table">
           <thead><tr><th>授权码</th><th>状态</th><th>适用</th><th>到期</th></tr></thead>
           <tbody>
             ${licenses.length ? licenses.map((l) => `
-              <tr><td class="lic-code">${esc(l.code)}</td>
-              <td>${licStatus(l)}</td>
-              <td>${l.scope === 1 ? esc(l.app_name || '指定应用') : '通用'}</td>
-              <td class="muted">${esc(l.expires_at || '永久')}</td></tr>`).join('')
+              <tr><td class="lic-code" data-label="授权码">${esc(l.code)}</td>
+              <td data-label="状态">${licStatus(l)}</td>
+              <td data-label="适用">${Number(l.scope) === 1 ? esc(l.app_name || '指定应用') : '通用'}</td>
+              <td class="muted" data-label="到期">${esc(l.expires_at || '永久')}</td></tr>`).join('')
               : '<tr><td colspan="4"><div class="empty">暂无授权码</div></td></tr>'}
           </tbody>
         </table></div>
@@ -93,14 +93,14 @@ async function render() {
     <!-- 下载记录 -->
     <div class="card" style="padding:0;margin-top:16px">
       <div style="padding:16px 18px"><h3 style="font-size:16px">我的下载记录（${logs.length}）</h3></div>
-      <div class="table-wrap"><table>
+      <div class="table-wrap"><table class="resp-table">
         <thead><tr><th>时间</th><th>应用</th><th>方式</th><th>IP</th></tr></thead>
         <tbody>
           ${logs.length ? logs.map((l) => `
-            <tr><td class="muted">${esc(l.created_at)}</td>
-            <td>${esc(l.app_name || '—')}</td>
-            <td>${l.license_id ? '<span class="tag tag-orange">授权</span>' : '<span class="tag tag-green">免费</span>'}</td>
-            <td class="muted">${esc(l.ip)}</td></tr>`).join('')
+            <tr><td class="muted" data-label="时间">${esc(l.created_at)}</td>
+            <td data-label="应用">${esc(l.app_name || '—')}</td>
+            <td data-label="方式">${l.license_id ? '<span class="tag tag-orange">授权</span>' : '<span class="tag tag-green">免费</span>'}</td>
+            <td class="muted" data-label="IP">${esc(l.ip)}</td></tr>`).join('')
             : '<tr><td colspan="4"><div class="empty">暂无下载记录</div></td></tr>'}
         </tbody>
       </table></div>

@@ -153,7 +153,7 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
 
 /* 底部固定下载栏 */
 .dock {
-  position: fixed; left: 0; right: 0; bottom: calc(var(--tab-h) + env(safe-area-inset-bottom)); z-index: 80;
+  position: fixed; left: 0; right: 0; bottom: env(safe-area-inset-bottom); z-index: 80;
   background: rgba(248, 248, 250, 0.85);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-top: 0.5px solid var(--line);
@@ -165,6 +165,23 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
 .dock .mini-info span { font-size: 11px; color: var(--text-3); }
 .dock .get-btn { padding: 10px 26px; font-size: 14px; }
 .dock-space { height: 84px; }
+
+/* 详情页悬浮返回按钮（毛玻璃圆形） */
+.back-fab {
+  position: fixed; top: calc(var(--nav-h) + 10px); left: 16px; z-index: 85;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue);
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform .12s;
+}
+.back-fab:active { transform: scale(0.92); }
+.back-fab svg { width: 22px; height: 22px; }
+/* 给返回按钮留出空间，避免压住详情图标 */
+.detail-head { padding-top: 56px; }
 
 /* ============ 登录 / 注册 ============ */
 .login-wrap {
@@ -255,6 +272,19 @@ th { text-align: left; font-size: 11px; color: var(--text-3); font-weight: 600; 
 td { padding: 10px; border-bottom: 0.5px solid var(--line); font-size: 12.5px; }
 tr:last-child td { border-bottom: none; }
 .table-wrap { overflow-x: auto; }
+
+/* 窄屏：数据表卡片化，避免列挤压换行，适配各种手机 */
+@media (max-width: 699px) {
+  .resp-table thead { display: none; }
+  .resp-table tr { display: block; padding: 12px 14px; border-bottom: 0.5px solid var(--line); }
+  .resp-table tr:last-child { border-bottom: none; }
+  .resp-table td {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; padding: 6px 0; border-bottom: none; font-size: 13px; text-align: right;
+  }
+  .resp-table td::before { content: attr(data-label); color: var(--text-3); font-size: 12px; flex: none; text-align: left; }
+  .resp-table td.lic-code { font-size: 12px; word-break: break-all; line-height: 1.4; }
+}
 .muted { color: var(--text-2); }
 .mono { font-family: 'SF Mono', Menlo, monospace; }
 
