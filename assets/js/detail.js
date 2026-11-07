@@ -105,6 +105,11 @@ async function render() {
           <h3>应用介绍</h3>
           <p>${esc(app.description)}</p>
         </div>` : ''}
+
+      <div id="related" class="related-wrap">
+        <div class="section-head"><h2 style="font-size:16px">相关应用</h2></div>
+        <div class="related-loading muted">加载中…</div>
+      </div>
     </div>`;
 
   const dock = document.getElementById('dock');
@@ -117,6 +122,46 @@ async function render() {
   dockBtn.textContent = app.require_license ? '授权获取' : '获取';
   dockBtn.classList.toggle('lock', !!app.require_license);
   dockBtn.addEventListener('click', () => startDownload(app));
+
+  loadRelated(app);
+}
+
+// 相关应用：同分类优先，不足则用最新应用补齐，排除当前应用
+async function loadRelated(app) {
+  const box = document.getElementById('related');
+  if (!box) return;
+  try {
+    const data = await API.apps({
+      category_id: app.category_id || '',
+      page: 1,
+      page_size: 10,
+    });
+    let list = (data.list || []).filter((x) => Number(x.id) !== Number(app.id));
+    // 同分类不足时，再取一批最新应用补齐
+    if (list.length < 5) {
+      const more = await API.apps({ page: 1, page_size: 10 });
+      const exist = new Set(list.map((x) => Number(x.id)).concat([Number(app.id)]));
+      for (const x of more.list || []) {
+        if (list.length >= 6) break;
+        if (!exist.has(Number(x.id))) { list.push(x); exist.add(Number(x.id)); }
+      }
+    }
+    list = list.slice(0, 6);
+    if (!list.length) { box.remove(); return; }
+    box.querySelector('.related-loading').outerHTML = `
+      <div class="related-scroll">
+        ${list.map((r) => `
+          <a class="related-card" href="app.html?id=${r.id}">
+            ${r.icon
+              ? `<img class="related-icon" src="${esc(API.fileUrl(r.icon))}" alt="${esc(r.name)} 图标" loading="lazy">`
+              : '<div class="related-icon ph">App</div>'}
+            <div class="related-name">${esc(r.name)}</div>
+            <div class="related-sub muted">${esc(r.category_name || formatSize(r.size))}</div>
+          </a>`).join('')}
+      </div>`;
+  } catch (e) {
+    box.remove();
+  }
 }
 
 document.getElementById('backFab').addEventListener('click', () => {

@@ -2,7 +2,7 @@
    首页 Today Feed（App Store 今日页风格）
    ============================================================ */
 const PAGE_SIZE = 24;
-const state = { keyword: '', category_id: '', page: 1, list: [], total: 0, loading: false };
+const state = { keyword: '', category_id: '', page: 1, list: [], total: 0, loading: false, notice: '' };
 
 const feedEl = document.getElementById('todayFeed');
 const chipsEl = document.getElementById('todayChips');
@@ -63,16 +63,23 @@ function feedRow(a) {
 }
 
 /* 渲染整个 feed */
+function noticeHtml() {
+  if (!state.notice) return '';
+  return `<div class="notice-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b25f00" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+    <span>${esc(state.notice)}</span></div>`;
+}
+
 function renderFeed() {
   if (!state.list.length) {
-    feedEl.innerHTML = `<div class="today-empty">
+    feedEl.innerHTML = noticeHtml() + `<div class="today-empty">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#c7c7cc" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <div style="margin-top:10px">${state.keyword ? '没有找到相关应用' : '暂无应用，请到后台添加'}</div>
     </div>`;
     return;
   }
 
-  let html = '';
+  let html = noticeHtml();
   // 非搜索状态：第一个应用作为 Hero 大卡片
   let rest = state.list;
   if (!state.keyword) {
@@ -152,12 +159,23 @@ feedEl.addEventListener('click', (e) => {
 
 /* 搜索防抖 */
 let timer;
-document.getElementById('searchInput').addEventListener('input', (e) => {
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+searchInput.addEventListener('input', (e) => {
+  searchClear.hidden = !e.target.value;
   clearTimeout(timer);
   timer = setTimeout(() => {
     state.keyword = e.target.value.trim();
     reset();
   }, 450);
+});
+/* 一键清除搜索 */
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchClear.hidden = true;
+  state.keyword = '';
+  searchInput.focus();
+  reset();
 });
 
 /* 分类 chips */
@@ -193,11 +211,7 @@ function renderDate() {
     const navName = document.getElementById('navName');
     if (navName) navName.textContent = siteName;
     document.title = `${siteName} - iOS IPA 应用下载`;
-    if (settings.notice) {
-      feedEl.innerHTML = `<div class="notice-bar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b25f00" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-        <span>${esc(settings.notice)}</span></div>`;
-    }
+    state.notice = settings.notice || '';
     await initChips();
     await reset();
   } catch (e) {

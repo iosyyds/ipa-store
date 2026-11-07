@@ -8,7 +8,7 @@ function esc(s) {
 }
 
 function licStatus(l) {
-  if (l.status === 2) return '<span class="tag tag-red">已禁用</span>';
+  if (Number(l.status) === 2) return '<span class="tag tag-red">已禁用</span>';
   if (l.expires_at && new Date(l.expires_at).getTime() < Date.now())
     return '<span class="tag tag-gray">已过期</span>';
   return '<span class="tag tag-green">有效</span>';
