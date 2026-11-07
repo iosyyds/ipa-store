@@ -84,9 +84,10 @@ function renderFeed() {
     const headTitle = state.keyword ? `搜索：${esc(state.keyword)}` : '全部应用';
     html += `<div class="feed-head"><h3>${headTitle}</h3>
       <p>共 ${state.total} 款 · 点击查看详情并获取</p></div>`;
+    const listTitle = state.keyword ? '搜索结果' : state.category_id ? '分类应用' : '热门应用';
     html += `<div class="today-card list-card">
       <div class="list-kicker">TODAY 精选</div>
-      <h3>${state.category_id ? '分类应用' : '热门应用'}</h3>
+      <h3>${listTitle}</h3>
       ${rest.map(feedRow).join('')}
     </div>`;
   }
