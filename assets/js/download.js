@@ -18,11 +18,35 @@ if (typeof toast !== 'function') {
   };
 }
 
+/* 未登录提示：iOS 风格确认弹窗，确认后再跳登录页并带回跳地址 */
+function promptLogin() {
+  const back = location.pathname.split('/').pop() + location.search;
+  const mask = document.createElement('div');
+  mask.className = 'mask';
+  mask.innerHTML = `
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet-head">
+        <h3>请先登录</h3>
+        <p>登录后即可获取该应用，授权码与下载记录会自动保存到你的账号</p>
+      </div>
+      <div class="sheet-foot" style="flex-direction:column">
+        <button class="primary" style="border:none;border-bottom:1px solid var(--line)" id="goLogin">去登录</button>
+        <button style="border:none;color:var(--text-2)" id="loginCancel">取消</button>
+      </div>
+    </div>`;
+  document.body.appendChild(mask);
+  const close = () => mask.remove();
+  mask.addEventListener('click', close);
+  mask.querySelector('#loginCancel').addEventListener('click', close);
+  mask.querySelector('#goLogin').addEventListener('click', () => {
+    location.href = `login.html?redirect=${encodeURIComponent(back || 'index.html')}`;
+  });
+}
+
 /* 入口：点击获取按钮 */
 async function startDownload(app) {
   if (!isLoggedIn()) {
-    const back = location.pathname.split('/').pop() + location.search;
-    location.href = `login.html?redirect=${encodeURIComponent(back || 'index.html')}`;
+    promptLogin();
     return;
   }
   try {
