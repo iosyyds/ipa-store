@@ -1,9 +1,11 @@
+/* ============================================================
+   首页 Today Feed（App Store 今日页风格）
+   ============================================================ */
 const PAGE_SIZE = 24;
 const state = { keyword: '', category_id: '', page: 1, list: [], total: 0, loading: false };
 
-const appListEl = document.getElementById('appList');
-const loadMoreSlot = document.getElementById('loadMoreSlot');
-const countText = document.getElementById('countText');
+const feedEl = document.getElementById('todayFeed');
+const chipsEl = document.getElementById('todayChips');
 
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) =>
@@ -16,91 +18,135 @@ function formatSize(bytes) {
   return mb >= 1024 ? `${(mb / 1024).toFixed(1)} GB` : `${mb.toFixed(1)} MB`;
 }
 
-function rowHtml(a) {
-  const icon = a.icon
-    ? `<img class="app-icon" src="${esc(API.fileUrl(a.icon))}" alt="">`
-    : '<div class="app-icon ph">App</div>';
-  return `
-    <div class="app-row" data-id="${a.id}">
-      ${icon}
-      <div class="app-info">
-        <h3>${esc(a.name)}</h3>
-        <div class="sub">${esc(a.short_desc || a.category_name || '')}</div>
-        <div class="meta">
-          <span>${esc(a.category_name || '')}</span>
-          ${a.size ? `<span>· ${formatSize(a.size)}</span>` : ''}
-          ${a.downloads ? `<span>· ${a.downloads} 次下载</span>` : ''}
-        </div>
-      </div>
-      <button class="get-btn ${a.require_license ? 'lock' : ''}" data-get="${a.id}">
-        ${a.require_license ? '授权获取' : '获取'}
-      </button>
-    </div>`;
+/* 图标：外链/本地兼容，无图标用占位 */
+function iconHtml(a, cls) {
+  return a.icon
+    ? `<img class="${cls}" src="${esc(API.fileUrl(a.icon))}" alt="${esc(a.name)} 图标">`
+    : `<div class="${cls} ph">App</div>`;
 }
 
-function render() {
+/* Hero 区视觉：有图标显示图标，无图标用 emoji 占位 */
+function heroVisual(a) {
+  if (a.icon)
+    return `<img class="hero-icon" src="${esc(API.fileUrl(a.icon))}" alt="${esc(a.name)} 图标">`;
+  return `<div class="hero-emoji">📱</div>`;
+}
+
+/* Hero 特色卡片 */
+function heroCard(a, idx) {
+  const grad = `grad-${idx % 5}`;
+  const kicker = a.category_name ? `今日推荐 · ${esc(a.category_name)}` : '今日推荐';
+  const sub = esc(a.short_desc || a.version || '登录后即可获取');
+  return `
+  <article class="today-card hero-card ${grad}" data-app="${a.id}">
+    <div class="hero-bg">${heroVisual(a)}</div>
+    <div class="hero-overlay">
+      <div class="hero-kicker">${kicker}</div>
+      <h2>${esc(a.name)}</h2>
+      <div class="hero-sub">${sub}</div>
+    </div>
+  </article>`;
+}
+
+/* 列表行 */
+function feedRow(a) {
+  const desc = esc(a.short_desc || a.category_name || '');
+  return `
+  <div class="feed-row" data-app="${a.id}">
+    ${iconHtml(a, 'feed-icon')}
+    <div class="feed-meta">
+      <h4>${esc(a.name)}</h4>
+      <div class="feed-desc">${desc}${a.size ? ` · ${formatSize(a.size)}` : ''}</div>
+    </div>
+    <span class="feed-view">查看</span>
+  </div>`;
+}
+
+/* 渲染整个 feed */
+function renderFeed() {
   if (!state.list.length) {
-    appListEl.innerHTML = `
-      <div class="empty">
-        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#c7c7cc" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <div>没有找到相关应用</div>
-      </div>`;
-    loadMoreSlot.innerHTML = '';
+    feedEl.innerHTML = `<div class="today-empty">
+      <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#c7c7cc" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <div style="margin-top:10px">${state.keyword ? '没有找到相关应用' : '暂无应用，请到后台添加'}</div>
+    </div>`;
     return;
   }
-  appListEl.innerHTML = state.list.map(rowHtml).join('');
-  countText.textContent = `共 ${state.total} 款`;
-  if (state.list.length < state.total) {
-    loadMoreSlot.innerHTML = '<button class="get-btn" id="moreBtn" style="padding:10px 26px">加载更多</button>';
-    document.getElementById('moreBtn').addEventListener('click', loadMore);
-  } else {
-    loadMoreSlot.innerHTML = '';
+
+  let html = '';
+  // 非搜索状态：第一个应用作为 Hero 大卡片
+  let rest = state.list;
+  if (!state.keyword) {
+    html += heroCard(state.list[0], 0);
+    rest = state.list.slice(1);
   }
+
+  if (rest.length) {
+    const headTitle = state.keyword ? `搜索：${esc(state.keyword)}` : '全部应用';
+    html += `<div class="feed-head"><h3>${headTitle}</h3>
+      <p>共 ${state.total} 款 · 点击查看详情并获取</p></div>`;
+    html += `<div class="today-card list-card">
+      <div class="list-kicker">TODAY 精选</div>
+      <h3>${state.category_id ? '分类应用' : '热门应用'}</h3>
+      ${rest.map(feedRow).join('')}
+    </div>`;
+  }
+
+  // 分页
+  if (state.list.length < state.total) {
+    html += `<div class="today-more"><button class="feed-view" id="moreBtn" style="padding:11px 28px">加载更多</button></div>`;
+  }
+  feedEl.innerHTML = html;
+  const more = document.getElementById('moreBtn');
+  if (more) more.addEventListener('click', loadMore);
+}
+
+/* 加载一页 */
+async function loadPage() {
+  const data = await API.apps({
+    keyword: state.keyword,
+    category_id: state.category_id,
+    page: state.page,
+    page_size: PAGE_SIZE,
+  });
+  if (state.page === 1) state.list = data.list;
+  else state.list.push(...data.list);
+  state.total = data.total;
 }
 
 async function loadMore() {
   if (state.loading) return;
   state.loading = true;
-  loadMoreSlot.innerHTML = '<span class="countText muted">加载中…</span>';
+  state.page++;
   try {
-    const data = await API.apps({
-      keyword: state.keyword,
-      category_id: state.category_id,
-      page: state.page,
-      page_size: PAGE_SIZE,
-    });
-    state.list.push(...data.list);
-    state.total = data.total;
-    state.page++;
-    render();
+    await loadPage();
+    renderFeed();
   } catch (e) {
-    appListEl.innerHTML = `<div class="empty">加载失败：${esc(e.message)}<br>请检查 config.js 中的 API 地址</div>`;
+    state.page--;
+    toast(e.message, 'error');
   } finally {
     state.loading = false;
   }
 }
 
+/* 重新加载（搜索/分类变化） */
 async function reset() {
   state.page = 1;
   state.list = [];
-  document.getElementById('listTitle').textContent =
-    state.keyword ? `搜索：${state.keyword}` : '全部应用';
-  await loadMore();
+  try {
+    await loadPage();
+    renderFeed();
+  } catch (e) {
+    feedEl.innerHTML = `<div class="today-empty">
+      <div>无法连接数据接口</div>
+      <div style="margin-top:8px;font-size:13px">请检查 assets/js/config.js 中的 API_BASE</div>
+    </div>`;
+  }
 }
 
-/* 事件委托：获取按钮 & 行点击 */
-appListEl.addEventListener('click', (e) => {
-  const getBtn = e.target.closest('[data-get]');
-  if (getBtn) {
-    e.stopPropagation();
-    const id = Number(getBtn.dataset.get);
-    // SQLite 返回的 id 为字符串，需显式转数字再比较，否则严格相等会失配
-    const app = state.list.find((a) => Number(a.id) === id);
-    if (app) startDownload(app);
-    return;
-  }
-  const row = e.target.closest('.app-row');
-  if (row) location.href = `app.html?id=${row.dataset.id}`;
+/* 事件委托：点击进详情 */
+feedEl.addEventListener('click', (e) => {
+  const card = e.target.closest('[data-app]');
+  if (card) location.href = `app.html?id=${encodeURIComponent(card.dataset.app)}`;
 });
 
 /* 搜索防抖 */
@@ -116,7 +162,6 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 /* 分类 chips */
 async function initChips() {
   const cats = await API.categories();
-  const chipsEl = document.getElementById('chips');
   chipsEl.innerHTML =
     `<button class="chip active" data-cat="">全部</button>` +
     cats.map((c) => `<button class="chip" data-cat="${c.id}">${esc(c.name)}</button>`).join('');
@@ -130,28 +175,34 @@ async function initChips() {
   });
 }
 
+/* 日期 */
+function renderDate() {
+  const now = new Date();
+  const week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][now.getDay()];
+  const el = document.getElementById('todayDate');
+  if (el) el.textContent = `${now.getMonth() + 1}月${now.getDate()}日 ${week}`;
+}
+
 /* 初始化 */
 (async function init() {
+  renderDate();
   try {
     const settings = await API.settings();
     const siteName = settings.site_name || '甜甜-IPA应用库';
-    document.getElementById('navName').textContent = siteName;
-    // Hero 大标题保持营销语“发现优质 iOS 应用”，不与导航栏品牌名重复
-    document.getElementById('heroSlogan').textContent = settings.site_slogan || '';
-    document.title = `${siteName} - iOS 应用下载`;
+    const navName = document.getElementById('navName');
+    if (navName) navName.textContent = siteName;
+    document.title = `${siteName} - iOS IPA 应用下载`;
     if (settings.notice) {
-      document.getElementById('noticeSlot').innerHTML =
-        `<div class="notice-bar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b25f00" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-          <span>${esc(settings.notice)}</span></div>`;
+      feedEl.innerHTML = `<div class="notice-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b25f00" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <span>${esc(settings.notice)}</span></div>`;
     }
     await initChips();
     await reset();
   } catch (e) {
-    appListEl.innerHTML = `
-      <div class="empty">
-        <div>无法连接数据接口</div>
-        <div style="margin-top:8px;font-size:13px">请修改 assets/js/config.js 中的 API_BASE 为你的后端地址</div>
-      </div>`;
+    feedEl.innerHTML = `<div class="today-empty">
+      <div>无法连接数据接口</div>
+      <div style="margin-top:8px;font-size:13px">请修改 assets/js/config.js 中的 API_BASE 为你的后端地址</div>
+    </div>`;
   }
 })();

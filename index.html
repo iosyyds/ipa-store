@@ -61,30 +61,18 @@
   </div>
 </nav>
 
-<div class="container">
-  <div id="noticeSlot"></div>
-  <header class="hero">
-    <h1 id="heroTitle">发现优质 iOS 应用</h1>
-    <p id="heroSlogan">精选应用，安全下载</p>
-    <div class="search-wrap">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input class="search-input" id="searchInput" placeholder="搜索应用名称…" enterkeyhint="search" aria-label="搜索应用">
-    </div>
-  </header>
-</div>
+<main class="today-wrap">
+  <div class="today-date" id="todayDate"></div>
+  <h1 class="today-big">Today</h1>
 
-<div class="chips" id="chips"></div>
+  <div class="today-search">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input class="search-input" id="searchInput" placeholder="搜索应用名称…" enterkeyhint="search" aria-label="搜索应用">
+  </div>
 
-<div class="container" id="apps">
-  <div class="section-head">
-    <h2 id="listTitle">全部应用</h2>
-    <span id="countText"></span>
-  </div>
-  <div class="app-list" id="appList">
-    <div class="empty">加载中…</div>
-  </div>
-  <div class="load-more" id="loadMoreSlot"></div>
-</div>
+  <div class="today-chips" id="todayChips"></div>
+  <div id="todayFeed"><div class="today-empty">加载中…</div></div>
+</main>
 
 <nav class="tabbar">
   <a class="tab-item active" href="index.html">

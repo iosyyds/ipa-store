@@ -316,3 +316,74 @@ tr:last-child td { border-bottom: none; }
   .app-icon { width: 62px; height: 62px; }
   .detail-title .app-icon { width: 104px; height: 104px; }
 }
+
+/* ============================================================
+   Today Feed（App Store 今日页风格）
+   ============================================================ */
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+/* 日期 + Today 大标题 */
+.today-date { color: var(--blue); font-size: 13px; font-weight: 700; margin-top: 20px; }
+.today-big { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin: 2px 0 20px; }
+
+/* 搜索条 */
+.today-search { position: relative; margin-bottom: 22px; }
+.today-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); }
+.today-search .search-input { margin: 0; }
+
+/* 分类横向滚动（复用 chip） */
+.today-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 6px; margin-bottom: 8px; scrollbar-width: none; }
+.today-chips::-webkit-scrollbar { display: none; }
+
+/* 通用卡片 */
+.today-card { border-radius: 22px; overflow: hidden; margin-bottom: 26px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10); transition: transform .15s; }
+.today-card:active { transform: scale(0.97); }
+
+/* Hero 特色卡片 */
+.hero-card { position: relative; min-height: 440px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+.hero-card .hero-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 30px; }
+.hero-card .hero-bg img { width: 150px; height: 150px; border-radius: 34px; object-fit: cover; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); }
+.hero-card .hero-bg .hero-emoji { font-size: 96px; }
+.hero-card .hero-overlay { position: relative; padding: 24px 22px 22px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55)); }
+.hero-kicker { font-size: 12px; font-weight: 700; letter-spacing: .6px; opacity: .85; }
+.hero-card h2 { font-size: 30px; font-weight: 800; line-height: 1.12; letter-spacing: -.6px; margin: 7px 0 6px; }
+.hero-card .hero-sub { font-size: 14px; opacity: .92; line-height: 1.4; }
+
+/* Hero 渐变背景（JS 轮换） */
+.grad-0 { background: linear-gradient(150deg, #5a7df4, #7b52d6 60%, #9546b8); }
+.grad-1 { background: linear-gradient(150deg, #ff8a5b, #f25c78 55%, #c2468f); }
+.grad-2 { background: linear-gradient(150deg, #22c1a3, #16a6c9 55%, #2b7fd6); }
+.grad-3 { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
+.grad-4 { background: linear-gradient(150deg, #6a82fb, #5b6cf0 55%, #4854c9); }
+
+/* 卡片外分区标题 */
+.feed-head { margin: 4px 2px 14px; }
+.feed-head h3 { font-size: 24px; font-weight: 800; letter-spacing: -.5px; }
+.feed-head p { color: var(--text-2); font-size: 14px; margin-top: 2px; }
+
+/* 白色列表卡片 */
+.list-card { background: #fff; padding: 20px 18px 10px; }
+.list-card .list-kicker { font-size: 12px; font-weight: 700; color: var(--text-2); letter-spacing: .5px; }
+.list-card > h3 { font-size: 25px; font-weight: 800; letter-spacing: -.6px; margin: 3px 0 4px; }
+
+/* 列表行 */
+.feed-row { display: flex; align-items: center; gap: 13px; padding: 11px 2px; border-top: 0.5px solid var(--line); }
+.feed-row .feed-icon { width: 58px; height: 58px; border-radius: 14px; object-fit: cover; background: #e5e5ea; flex: none; }
+.feed-row .feed-icon.ph { display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 12px; }
+.feed-row .feed-meta { flex: 1; min-width: 0; }
+.feed-row h4 { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feed-row .feed-desc { font-size: 12px; color: var(--text-2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feed-view { flex: none; padding: 8px 18px; border-radius: 980px; background: rgba(10, 132, 255, .12); color: var(--blue); font-size: 14px; font-weight: 700; transition: transform .12s, background .15s; }
+.feed-view:active { transform: scale(.94); }
+
+/* 空状态 / 加载更多 */
+.today-more { text-align: center; margin: 4px 0 30px; }
+.today-empty { text-align: center; padding: 70px 20px; color: var(--text-3); }
+
+@media (min-width: 700px) {
+  .today-wrap { padding: 0 24px; }
+  .today-big { font-size: 42px; }
+  .hero-card { min-height: 480px; }
+  .hero-card .hero-bg img { width: 168px; height: 168px; border-radius: 38px; }
+  .hero-card h2 { font-size: 34px; }
+}
