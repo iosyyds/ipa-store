@@ -50,22 +50,21 @@ function noticeHtml() {
     <span class="notice-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7"/></svg>
     </span>
-    <div class="notice-scroll"><div class="notice-track">
-      <span class="notice-text">${esc(state.notice)}</span><span class="notice-text" aria-hidden="true">${esc(state.notice)}</span>
-    </div></div></div>`;
+    <div class="notice-scroll"><span class="notice-text">${esc(state.notice)}</span></div>
+    <span class="notice-chevron" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span></div>`;
 }
 
-/* 公告文字超出一行时启用无缝滚动，不超出则静态展示 */
+/* 公告文字超出一行时：末尾渐隐并允许点击展开全文；不超出则静态展示 */
 function setupNotice() {
   const bar = document.querySelector('.notice-bar');
   if (!bar) return;
   const scroll = bar.querySelector('.notice-scroll');
-  const track = bar.querySelector('.notice-track');
-  const copy = track.querySelectorAll('.notice-text')[1];
+  const chev = bar.querySelector('.notice-chevron');
   if (scroll.scrollWidth > scroll.clientWidth + 2) {
-    track.classList.add('is-scroll');
-  } else {
-    copy.style.display = 'none';
+    bar.classList.add('can-expand');
+    chev.hidden = false;
   }
 }
 
@@ -90,6 +89,7 @@ function renderFeed() {
     ${state.list.map(feedRow).join('')}
   </div>`;
 
+  // 分页
   if (state.list.length < state.total) {
     html += `<div class="today-more"><button class="more-btn" id="moreBtn">加载更多</button></div>`;
   }
@@ -142,8 +142,13 @@ async function reset() {
   }
 }
 
-/* 事件委托：点击进详情 */
+/* 事件委托：点击公告展开/收起，点击应用进详情 */
 feedEl.addEventListener('click', (e) => {
+  const bar = e.target.closest('.notice-bar');
+  if (bar && bar.classList.contains('can-expand')) {
+    bar.classList.toggle('expanded');
+    return;
+  }
   const card = e.target.closest('[data-app]');
   if (card) location.href = `app.html?id=${encodeURIComponent(card.dataset.app)}`;
 });
