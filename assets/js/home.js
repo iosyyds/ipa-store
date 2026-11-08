@@ -61,8 +61,9 @@ function setupNotice() {
   const bar = document.querySelector('.notice-bar');
   if (!bar) return;
   const scroll = bar.querySelector('.notice-scroll');
+  const txt = bar.querySelector('.notice-text');
   const chev = bar.querySelector('.notice-chevron');
-  if (scroll.scrollWidth > scroll.clientWidth + 2) {
+  if (txt.scrollWidth > scroll.clientWidth + 2) {
     bar.classList.add('can-expand');
     chev.hidden = false;
   }
