@@ -35,7 +35,21 @@ function feedRow(a) {
       <h4>${esc(a.name)}</h4>
       <div class="feed-desc">${desc}${a.size ? ` · ${formatSize(a.size)}` : ''}</div>
     </div>
-    <span class="feed-view">查看</span>
+    <span class="feed-view">获取</span>
+  </div>`;
+}
+
+/* 精选横向卡片：仅在“全部”且应用足够时展示 */
+function featureHtml() {
+  if (state.keyword || state.category_id || state.list.length < 3) return '';
+  const picks = state.list.slice(0, 6);
+  return `<div class="feature-scroll">
+    ${picks.map((a, i) => `
+      <div class="feature-card grad-${i % 5}" data-app="${a.id}">
+        <div class="fc-kicker">今日精选</div>
+        <div class="fc-name">${esc(a.name)}</div>
+        <div class="fc-desc">${esc(a.short_desc || a.category_name || '')}</div>
+      </div>`).join('')}
   </div>`;
 }
 
@@ -57,19 +71,20 @@ function renderFeed() {
   }
 
   let html = noticeHtml();
-  const headTitle = state.keyword ? `搜索：${esc(state.keyword)}` : '全部应用';
-  const listTitle = state.keyword ? '搜索结果' : state.category_id ? '分类应用' : '热门应用';
-  html += `<div class="feed-head"><h3>${headTitle}</h3>
-    <p>共 ${state.total} 款 · 点击查看详情并获取</p></div>`;
+  html += featureHtml();
+  const headTitle = state.keyword ? `搜索：${esc(state.keyword)}`
+    : state.category_id ? '分类应用' : '全部应用';
+  html += `<div class="feed-head">
+    <h3>${headTitle}</h3>
+    <span class="feed-count">共 ${state.total} 款</span>
+  </div>`;
   html += `<div class="today-card list-card">
-    <div class="list-kicker">TODAY 精选</div>
-    <h3>${listTitle}</h3>
     ${state.list.map(feedRow).join('')}
   </div>`;
 
   // 分页
   if (state.list.length < state.total) {
-    html += `<div class="today-more"><button class="feed-view" id="moreBtn" style="padding:11px 28px">加载更多</button></div>`;
+    html += `<div class="today-more"><button class="more-btn" id="moreBtn">加载更多</button></div>`;
   }
   feedEl.innerHTML = html;
   const more = document.getElementById('moreBtn');
