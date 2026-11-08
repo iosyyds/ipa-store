@@ -18,9 +18,13 @@ function formatSize(bytes) {
 }
 
 function iconHtml(a) {
-  return a.icon
-    ? `<img class="feed-icon" src="${esc(API.fileUrl(a.icon))}" alt="${esc(a.name)} 图标">`
-    : `<div class="feed-icon ph">App</div>`;
+  const ch = esc((a.name || 'A').trim().charAt(0).toUpperCase());
+  if (!a.icon) return `<div class="feed-icon ph"><span class="ph-letter">${ch}</span></div>`;
+  return `<div class="feed-icon">
+      <img src="${esc(API.fileUrl(a.icon))}" alt="" loading="lazy"
+           onerror="this.parentElement.classList.add('ph');this.remove();">
+      <span class="ph-letter">${ch}</span>
+    </div>`;
 }
 
 function feedRow(a) {
@@ -31,7 +35,7 @@ function feedRow(a) {
       <h4>${esc(a.name)}</h4>
       <div class="feed-desc">${esc(a.short_desc || a.version || '')}${a.size ? ` · ${formatSize(a.size)}` : ''}</div>
     </div>
-    <span class="feed-view">查看</span>
+    <span class="feed-view">获取</span>
   </div>`;
 }
 
@@ -41,8 +45,6 @@ function render() {
     return;
   }
   let html = `<div class="today-card list-card">
-    <div class="list-kicker">分类应用</div>
-    <h3>全部（${st.total}）</h3>
     ${st.list.map(feedRow).join('')}
   </div>`;
   if (st.list.length < st.total) {

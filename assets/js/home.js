@@ -18,11 +18,15 @@ function formatSize(bytes) {
   return mb >= 1024 ? `${(mb / 1024).toFixed(1)} GB` : `${mb.toFixed(1)} MB`;
 }
 
-/* 图标：外链/本地兼容，无图标用占位 */
+/* 图标：外链/本地兼容；加载失败优雅回退为首字占位 */
 function iconHtml(a, cls) {
-  return a.icon
-    ? `<img class="${cls}" src="${esc(API.fileUrl(a.icon))}" alt="${esc(a.name)} 图标">`
-    : `<div class="${cls} ph">App</div>`;
+  const ch = esc((a.name || 'A').trim().charAt(0).toUpperCase());
+  if (!a.icon) return `<div class="${cls} ph"><span class="ph-letter">${ch}</span></div>`;
+  return `<div class="${cls}">
+      <img src="${esc(API.fileUrl(a.icon))}" alt="" loading="lazy"
+           onerror="this.parentElement.classList.add('ph');this.remove();">
+      <span class="ph-letter">${ch}</span>
+    </div>`;
 }
 
 /* 列表行 */
@@ -36,20 +40,6 @@ function feedRow(a) {
       <div class="feed-desc">${desc}${a.size ? ` · ${formatSize(a.size)}` : ''}</div>
     </div>
     <span class="feed-view">获取</span>
-  </div>`;
-}
-
-/* 精选横向卡片：仅在“全部”且应用足够时展示 */
-function featureHtml() {
-  if (state.keyword || state.category_id || state.list.length < 3) return '';
-  const picks = state.list.slice(0, 6);
-  return `<div class="feature-scroll">
-    ${picks.map((a, i) => `
-      <div class="feature-card grad-${i % 5}" data-app="${a.id}">
-        <div class="fc-kicker">今日精选</div>
-        <div class="fc-name">${esc(a.name)}</div>
-        <div class="fc-desc">${esc(a.short_desc || a.category_name || '')}</div>
-      </div>`).join('')}
   </div>`;
 }
 
@@ -71,7 +61,6 @@ function renderFeed() {
   }
 
   let html = noticeHtml();
-  html += featureHtml();
   const headTitle = state.keyword ? `搜索：${esc(state.keyword)}`
     : state.category_id ? '分类应用' : '全部应用';
   html += `<div class="feed-head">
