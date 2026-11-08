@@ -342,6 +342,16 @@ tr:last-child td { border-bottom: none; }
 .sheet-foot button.primary { color: var(--blue); border-left: 0.5px solid var(--line); }
 .sheet-foot button:disabled { opacity: .5; }
 
+/* 分类选择弹窗内的分组列表 */
+.cat-list { padding: 6px 14px 4px; display: flex; flex-direction: column; }
+.cat-opt {
+  text-align: center; font-size: 15px; font-weight: 600; color: var(--blue);
+  padding: 14px 10px; border-bottom: 0.5px solid var(--line);
+  transition: background .15s;
+}
+.cat-opt:last-child { border-bottom: none; }
+.cat-opt:active { background: rgba(60, 60, 67, 0.1); }
+
 /* Toast */
 .toast {
   position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
