@@ -47,8 +47,26 @@ function feedRow(a) {
 function noticeHtml() {
   if (!state.notice) return '';
   return `<div class="notice-bar">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b25f00" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-    <span>${esc(state.notice)}</span></div>`;
+    <span class="notice-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a5 5 0 0 1 0 7"/></svg>
+    </span>
+    <div class="notice-scroll"><div class="notice-track">
+      <span class="notice-text">${esc(state.notice)}</span><span class="notice-text" aria-hidden="true">${esc(state.notice)}</span>
+    </div></div></div>`;
+}
+
+/* 公告文字超出一行时启用无缝滚动，不超出则静态展示 */
+function setupNotice() {
+  const bar = document.querySelector('.notice-bar');
+  if (!bar) return;
+  const scroll = bar.querySelector('.notice-scroll');
+  const track = bar.querySelector('.notice-track');
+  const copy = track.querySelectorAll('.notice-text')[1];
+  if (scroll.scrollWidth > scroll.clientWidth + 2) {
+    track.classList.add('is-scroll');
+  } else {
+    copy.style.display = 'none';
+  }
 }
 
 function renderFeed() {
@@ -57,6 +75,7 @@ function renderFeed() {
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#c7c7cc" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <div style="margin-top:10px">${state.keyword ? '没有找到相关应用' : '暂无应用，请到后台添加'}</div>
     </div>`;
+    setupNotice();
     return;
   }
 
@@ -71,11 +90,11 @@ function renderFeed() {
     ${state.list.map(feedRow).join('')}
   </div>`;
 
-  // 分页
   if (state.list.length < state.total) {
     html += `<div class="today-more"><button class="more-btn" id="moreBtn">加载更多</button></div>`;
   }
   feedEl.innerHTML = html;
+  setupNotice();
   const more = document.getElementById('moreBtn');
   if (more) more.addEventListener('click', loadMore);
 }
