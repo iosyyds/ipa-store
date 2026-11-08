@@ -30,18 +30,18 @@
   padding: 0; margin: 0 0 20px; scrollbar-width: none; scroll-margin-top: 64px;
 }
 
-/* ---------- 公告：单行滚动，图标清晰 ---------- */
+/* ---------- 公告：单行静态，点击展开 ---------- */
 .today-wrap .notice-bar {
   margin: 0 0 20px;
-  padding: 10px 14px 10px 10px;
+  padding: 10px 12px 10px 10px;
   display: flex;
   align-items: center;
   gap: 10px;
   background: rgba(255, 149, 0, 0.1);
   border: 0.5px solid rgba(255, 149, 0, 0.28);
   border-radius: 12px;
-  overflow: hidden;
 }
+.notice-bar.can-expand { cursor: pointer; }
 .notice-icon {
   flex: none;
   width: 26px;
@@ -54,23 +54,41 @@
   color: #c96c00;
 }
 .notice-icon svg { width: 15px; height: 15px; display: block; }
-.notice-scroll { flex: 1; overflow: hidden; }
-.notice-track { display: inline-flex; align-items: center; white-space: nowrap; will-change: transform; }
+.notice-scroll {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent);
+}
 .notice-text {
+  display: block;
   font-size: 13px;
   line-height: 1;
   color: #a85a00;
-  padding-right: 44px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.notice-track.is-scroll { animation: notice-marquee 16s linear infinite; }
-.notice-bar:hover .notice-track.is-scroll { animation-play-state: paused; }
-@keyframes notice-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.notice-chevron {
+  flex: none;
+  color: #c96c00;
+  transition: transform .2s ease;
 }
-@media (prefers-reduced-motion: reduce) {
-  .notice-track.is-scroll { animation: none; }
+.notice-chevron svg { width: 16px; height: 16px; display: block; }
+
+/* 展开态：全文换行、去掉渐隐、箭头翻转 */
+.notice-bar.expanded { align-items: flex-start; }
+.notice-bar.expanded .notice-icon { margin-top: 1px; }
+.notice-bar.expanded .notice-scroll {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
+.notice-bar.expanded .notice-text {
+  white-space: normal;
+  line-height: 1.45;
+}
+.notice-bar.expanded .notice-chevron { transform: rotate(180deg); margin-top: 2px; }
 
 /* ---------- 区块标题 ---------- */
 .feed-head { display: flex; align-items: baseline; justify-content: space-between; margin: 0 2px 10px; }
