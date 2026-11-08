@@ -416,7 +416,7 @@ tr:last-child td { border-bottom: none; }
 /* ============================================================
    Today Feed（App Store 今日页风格）
    ============================================================ */
-.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 104px; }
 
 /* 日期 + Today 大标题 */
 .today-date { color: var(--blue); font-size: 13px; font-weight: 700; margin-top: 20px; }
@@ -441,16 +441,6 @@ tr:last-child td { border-bottom: none; }
 /* 通用卡片 */
 .today-card { border-radius: 22px; overflow: hidden; margin-bottom: 26px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10); transition: transform .15s; }
 .today-card:active { transform: scale(0.97); }
-
-/* Hero 特色卡片 */
-.hero-card { position: relative; min-height: 440px; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
-.hero-card .hero-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 30px; }
-.hero-card .hero-bg img { width: 150px; height: 150px; border-radius: 34px; object-fit: cover; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); }
-.hero-card .hero-bg .hero-emoji { font-size: 96px; }
-.hero-card .hero-overlay { position: relative; padding: 24px 22px 22px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55)); }
-.hero-kicker { font-size: 12px; font-weight: 700; letter-spacing: .6px; opacity: .85; }
-.hero-card h2 { font-size: 30px; font-weight: 800; line-height: 1.12; letter-spacing: -.6px; margin: 7px 0 6px; }
-.hero-card .hero-sub { font-size: 14px; opacity: .92; line-height: 1.4; }
 
 /* Hero 渐变背景（JS 轮换） */
 .grad-0 { background: linear-gradient(150deg, #5a7df4, #7b52d6 60%, #9546b8); }
@@ -487,9 +477,6 @@ tr:last-child td { border-bottom: none; }
 @media (min-width: 700px) {
   .today-wrap { padding: 0 24px; }
   .today-big { font-size: 42px; }
-  .hero-card { min-height: 480px; }
-  .hero-card .hero-bg img { width: 168px; height: 168px; border-radius: 38px; }
-  .hero-card h2 { font-size: 34px; }
 }
 
 /* 相关应用 */

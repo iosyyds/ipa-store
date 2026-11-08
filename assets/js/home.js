@@ -25,29 +25,6 @@ function iconHtml(a, cls) {
     : `<div class="${cls} ph">App</div>`;
 }
 
-/* Hero 区视觉：有图标显示图标，无图标用 emoji 占位 */
-function heroVisual(a) {
-  if (a.icon)
-    return `<img class="hero-icon" src="${esc(API.fileUrl(a.icon))}" alt="${esc(a.name)} 图标">`;
-  return `<div class="hero-emoji">📱</div>`;
-}
-
-/* Hero 特色卡片 */
-function heroCard(a, idx) {
-  const grad = `grad-${idx % 5}`;
-  const kicker = a.category_name ? `今日推荐 · ${esc(a.category_name)}` : '今日推荐';
-  const sub = esc(a.short_desc || a.version || '登录后即可获取');
-  return `
-  <article class="today-card hero-card ${grad}" data-app="${a.id}">
-    <div class="hero-bg">${heroVisual(a)}</div>
-    <div class="hero-overlay">
-      <div class="hero-kicker">${kicker}</div>
-      <h2>${esc(a.name)}</h2>
-      <div class="hero-sub">${sub}</div>
-    </div>
-  </article>`;
-}
-
 /* 列表行 */
 function feedRow(a) {
   const desc = esc(a.short_desc || a.category_name || '');
@@ -80,24 +57,15 @@ function renderFeed() {
   }
 
   let html = noticeHtml();
-  // 非搜索状态：第一个应用作为 Hero 大卡片
-  let rest = state.list;
-  if (!state.keyword) {
-    html += heroCard(state.list[0], 0);
-    rest = state.list.slice(1);
-  }
-
-  if (rest.length) {
-    const headTitle = state.keyword ? `搜索：${esc(state.keyword)}` : '全部应用';
-    html += `<div class="feed-head"><h3>${headTitle}</h3>
-      <p>共 ${state.total} 款 · 点击查看详情并获取</p></div>`;
-    const listTitle = state.keyword ? '搜索结果' : state.category_id ? '分类应用' : '热门应用';
-    html += `<div class="today-card list-card">
-      <div class="list-kicker">TODAY 精选</div>
-      <h3>${listTitle}</h3>
-      ${rest.map(feedRow).join('')}
-    </div>`;
-  }
+  const headTitle = state.keyword ? `搜索：${esc(state.keyword)}` : '全部应用';
+  const listTitle = state.keyword ? '搜索结果' : state.category_id ? '分类应用' : '热门应用';
+  html += `<div class="feed-head"><h3>${headTitle}</h3>
+    <p>共 ${state.total} 款 · 点击查看详情并获取</p></div>`;
+  html += `<div class="today-card list-card">
+    <div class="list-kicker">TODAY 精选</div>
+    <h3>${listTitle}</h3>
+    ${state.list.map(feedRow).join('')}
+  </div>`;
 
   // 分页
   if (state.list.length < state.total) {
