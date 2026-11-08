@@ -201,38 +201,6 @@ function applyCategory(catId) {
   reset();
 }
 
-/* 点击「分类」导航：弹出 iOS 风格分类选择面板 */
-function openCategorySheet() {
-  const mask = document.createElement('div');
-  mask.className = 'mask';
-  const rows =
-    `<button type="button" class="cat-opt" data-cat="">全部应用</button>` +
-    allCats.map((c) =>
-      `<button type="button" class="cat-opt" data-cat="${c.id}">${esc(c.name)}</button>`).join('');
-  mask.innerHTML = `
-    <div class="sheet">
-      <div class="sheet-head">
-        <h3>选择分类</h3>
-        <p>共 ${allCats.length} 个分类</p>
-      </div>
-      <div class="cat-list">${rows}</div>
-      <div class="sheet-foot">
-        <button type="button" id="catCancel" style="color:var(--text-2)">取消</button>
-      </div>
-    </div>`;
-  document.body.appendChild(mask);
-  const close = () => mask.remove();
-  mask.querySelector('#catCancel').addEventListener('click', close);
-  mask.querySelectorAll('.cat-opt').forEach((b) => {
-    b.addEventListener('click', () => {
-      const catId = b.dataset.cat;
-      close();
-      applyCategory(catId);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-}
-
 /* 日期 */
 function renderDate() {
   const now = new Date();
@@ -252,13 +220,7 @@ function renderDate() {
     document.title = `${siteName} - iOS IPA 应用下载`;
     state.notice = settings.notice || '';
     await initChips();
-    bindCategoryEntry();
     await reset();
-    // 从其他页面点「分类」跳转到首页时，自动弹出分类选择
-    if (location.hash === '#chips') {
-      history.replaceState(null, '', location.pathname);
-      openCategorySheet();
-    }
   } catch (e) {
     feedEl.innerHTML = `<div class="today-empty">
       <div>无法连接数据接口</div>
@@ -266,13 +228,3 @@ function renderDate() {
     </div>`;
   }
 })();
-
-/* 拦截首页内所有指向 #chips 的「分类」入口，改为弹出分类面板 */
-function bindCategoryEntry() {
-  document.querySelectorAll('a[href="#chips"]').forEach((a) => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      openCategorySheet();
-    });
-  });
-}

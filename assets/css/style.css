@@ -342,16 +342,6 @@ tr:last-child td { border-bottom: none; }
 .sheet-foot button.primary { color: var(--blue); border-left: 0.5px solid var(--line); }
 .sheet-foot button:disabled { opacity: .5; }
 
-/* 分类选择弹窗内的分组列表 */
-.cat-list { padding: 6px 14px 4px; display: flex; flex-direction: column; }
-.cat-opt {
-  text-align: center; font-size: 15px; font-weight: 600; color: var(--blue);
-  padding: 14px 10px; border-bottom: 0.5px solid var(--line);
-  transition: background .15s;
-}
-.cat-opt:last-child { border-bottom: none; }
-.cat-opt:active { background: rgba(60, 60, 67, 0.1); }
-
 /* Toast */
 .toast {
   position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
@@ -489,3 +479,53 @@ tr:last-child td { border-bottom: none; }
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .related-sub { font-size: 10.5px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ============================================================
+   类别页（App Store 分类网格）
+   ============================================================ */
+.cat-page { max-width: 720px; margin: 0 auto; padding: 0 20px 110px; }
+.cat-page-head { padding: 26px 0 18px; }
+.cat-page-head h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
+.cat-page-head p { color: var(--text-2); font-size: 15px; margin-top: 4px; }
+
+.cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.cat-card {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 150px; padding: 16px; border-radius: 20px; color: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12); transition: transform .15s;
+}
+.cat-card:active { transform: scale(0.95); }
+.cat-card-icon { align-self: flex-end; width: 34px; height: 34px; opacity: .92; }
+.cat-card-icon svg { width: 100%; height: 100%; }
+.cat-card-icon img { width: 34px; height: 34px; border-radius: 9px; object-fit: cover; }
+.cat-card-name { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
+.cat-card-count { font-size: 12.5px; opacity: .85; margin-top: 2px; }
+
+/* 分类渐变（12 色循环） */
+.cat-grad-0  { background: linear-gradient(150deg, #5a7df4, #7b52d6 60%, #9546b8); }
+.cat-grad-1  { background: linear-gradient(150deg, #ff8a5b, #f25c78 55%, #c2468f); }
+.cat-grad-2  { background: linear-gradient(150deg, #22c1a3, #16a6c9 55%, #2b7fd6); }
+.cat-grad-3  { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
+.cat-grad-4  { background: linear-gradient(150deg, #34c759, #30b0c7 60%, #0a84ff); }
+.cat-grad-5  { background: linear-gradient(150deg, #bf5af2, #8944d6 55%, #5e5ce6); }
+.cat-grad-6  { background: linear-gradient(150deg, #ff6482, #ff375f 55%, #d70015); }
+.cat-grad-7  { background: linear-gradient(150deg, #64d2ff, #0a84ff 55%, #0040df); }
+.cat-grad-8  { background: linear-gradient(150deg, #ffd60a, #ff9f0a 55%, #ff6b00); }
+.cat-grad-9  { background: linear-gradient(150deg, #5e5ce6, #3634d6 55%, #1d1b8f); }
+.cat-grad-10 { background: linear-gradient(150deg, #2bd4c7, #1ea6a6 55%, #0f7b75); }
+.cat-grad-11 { background: linear-gradient(150deg, #ff9ea6, #f25c8a 55%, #b83a78); }
+
+/* ============================================================
+   分类内页
+   ============================================================ */
+.cat-detail { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; }
+.cat-detail-head { padding: 24px 0 16px; }
+.cat-detail-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
+.cat-detail-head p { color: var(--text-2); font-size: 14px; margin-top: 4px; }
+
+@media (max-width: 480px) {
+  .cat-page, .cat-detail { padding-left: 16px; padding-right: 16px; }
+  .cat-grid { gap: 12px; }
+  .cat-card { min-height: 138px; padding: 14px; border-radius: 18px; }
+  .cat-card-name { font-size: 18px; }
+}
