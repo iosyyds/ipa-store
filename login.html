@@ -14,6 +14,7 @@
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <meta name="theme-color" content="#0a84ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="甜甜">
 <meta property="og:type" content="website">
@@ -109,6 +110,22 @@ function showReg() {
 }
 tabLogin.addEventListener('click', showLogin);
 tabReg.addEventListener('click', showReg);
+
+/* 注册开关：后台关闭注册后隐藏注册入口，仅保留登录 */
+(async () => {
+  try {
+    const st = await API.settings();
+    if (st.register_open === '0') {
+      tabReg.style.display = 'none';
+      showLogin();
+      const hint = document.createElement('div');
+      hint.className = 'muted';
+      hint.style.cssText = 'font-size:12px;text-align:center;margin-top:14px';
+      hint.textContent = '注册已关闭，如需账号请联系管理员';
+      document.querySelector('.seg').after(hint);
+    }
+  } catch (e) { /* 接口异常时保持默认开放 */ }
+})();
 
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
