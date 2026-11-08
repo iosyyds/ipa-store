@@ -138,15 +138,19 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
 }
 .hero-share {
-  position: absolute; top: 14px; right: 16px;
-  width: 34px; height: 34px; border-radius: 50%;
+  position: absolute; top: 10px; right: 16px;
+  width: 40px; height: 40px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255, 255, 255, 0.22); color: #fff;
-  backdrop-filter: blur(10px); transition: transform .15s, background .15s;
+  color: var(--blue);
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform .12s, background .15s;
 }
-.hero-share:active { transform: scale(0.9); }
-.hero-share.done { background: rgba(52, 199, 89, 0.85); }
-.hero-share svg { width: 18px; height: 18px; }
+.hero-share:active { transform: scale(0.92); }
+.hero-share.done { background: rgba(52, 199, 89, 0.92); color: #fff; }
+.hero-share svg { width: 20px; height: 20px; }
 .hero-main { display: flex; gap: 16px; align-items: center; max-width: 720px; margin: 0 auto; }
 .hero-icon {
   flex: none; width: 96px; height: 96px; border-radius: 23px; overflow: hidden;
