@@ -5,7 +5,7 @@ const PAGE_SIZE = 24;
 const state = { keyword: '', category_id: '', page: 1, list: [], total: 0, loading: false, notice: '' };
 
 const feedEl = document.getElementById('todayFeed');
-const chipsEl = document.getElementById('todayChips');
+const chipsEl = document.getElementById('chips');
 
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) =>

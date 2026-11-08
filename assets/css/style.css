@@ -396,7 +396,7 @@ tr:last-child td { border-bottom: none; }
 .search-clear:active { transform: translateY(-50%) scale(0.9); background: #8e8e93; }
 
 /* 分类横向滚动（复用 chip） */
-.today-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 6px; margin-bottom: 8px; scrollbar-width: none; }
+.today-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 6px; margin-bottom: 8px; scrollbar-width: none; scroll-margin-top: 64px; }
 .today-chips::-webkit-scrollbar { display: none; }
 
 /* 通用卡片 */
