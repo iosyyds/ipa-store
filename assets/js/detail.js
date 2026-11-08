@@ -64,38 +64,47 @@ async function render() {
   }
 
   updateSeo(app);
-  const icon = app.icon
-    ? `<img class="app-icon" src="${esc(API.fileUrl(app.icon))}" alt="${esc(app.name)} 图标">`
-    : '<div class="app-icon ph">App</div>';
+  const heroIcon = app.icon
+    ? `<img src="${esc(API.fileUrl(app.icon))}" alt="${esc(app.name)} 图标">`
+    : '<span>App</span>';
 
   root.innerHTML = `
-    <div class="container">
-      <header class="detail-head">
-        <div class="detail-title">
-          ${icon}
-          <div>
-            <h1>${esc(app.name)}</h1>
-            <div class="dev">${esc(app.category_name || 'iOS 应用')}</div>
-            <div class="bundle">${esc(app.bundle_id || '')}</div>
-          </div>
+    <div class="detail-hero grad-0">
+      <button type="button" class="hero-share" id="heroShare" aria-label="分享">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7h14v-7"/></svg>
+      </button>
+      <div class="hero-main">
+        <div class="hero-icon">${heroIcon}</div>
+        <div class="hero-info">
+          <h1>${esc(app.name)}</h1>
+          <div class="hero-sub">${esc(app.short_desc || app.category_name || 'iOS 应用')}</div>
+          <div class="hero-bundle">${esc(app.bundle_id || '')}</div>
         </div>
-      </header>
+      </div>
+    </div>
 
-      <div class="info-bar">
-        <div class="info-cell"><div class="v">${esc(app.version)}</div><div class="l">版本</div></div>
-        <div class="info-cell"><div class="v">${formatSize(app.size)}</div><div class="l">大小</div></div>
-        <div class="info-cell"><div class="v">${app.downloads}</div><div class="l">下载量</div></div>
-        <div class="info-cell"><div class="v" style="font-size:11px">${esc(app.updated_at || '—')}</div><div class="l">更新时间</div></div>
+    <div class="container">
+      <div class="detail-metrics">
+        <div class="metric"><div class="m-v">${formatSize(app.size)}</div><div class="m-l">大小</div></div>
+        <div class="metric"><div class="m-v">${Number(app.downloads || 0)}</div><div class="m-l">下载量</div></div>
+        <div class="metric"><div class="m-v">${esc(app.version)}</div><div class="m-l">版本</div></div>
+        <div class="metric"><div class="m-v m-date">${esc((app.updated_at || '—').split(' ')[0])}</div><div class="m-l">更新时间</div></div>
       </div>
 
       ${app.screenshots && app.screenshots.length ? `
-        <div class="section-head"><h2 style="font-size:16px">预览</h2></div>
+        <div class="section-head"><h2 style="font-size:18px">预览</h2></div>
         <div class="shots">
           ${app.screenshots.map((u) => `<img src="${esc(API.fileUrl(u))}" alt="${esc(app.name)} 截图" loading="lazy">`).join('')}
         </div>` : ''}
 
+      <div class="compat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M11 19h2"/></svg>
+        <span>兼容 iPhone、iPad</span>
+      </div>
+
       ${app.whatsnew ? `
-        <div class="text-block" style="margin-top:16px">
+        <div class="text-block">
           <h3>更新内容（${esc(app.version)}）</h3>
           <p>${esc(app.whatsnew)}</p>
         </div>` : ''}
@@ -103,14 +112,41 @@ async function render() {
       ${app.description ? `
         <div class="text-block">
           <h3>应用介绍</h3>
-          <p>${esc(app.description)}</p>
+          <p class="desc-clamp" id="descText">${esc(app.description)}</p>
+          <button type="button" class="desc-more" id="descMore">更多</button>
         </div>` : ''}
 
       <div id="related" class="related-wrap">
-        <div class="section-head"><h2 style="font-size:16px">相关应用</h2></div>
+        <div class="section-head"><h2 style="font-size:18px">相关应用</h2></div>
         <div class="related-loading muted">加载中…</div>
       </div>
     </div>`;
+
+  // 分享：优先系统分享，否则复制链接
+  const shareBtn = document.getElementById('heroShare');
+  shareBtn.addEventListener('click', async () => {
+    const link = location.href;
+    if (navigator.share) {
+      try { await navigator.share({ title: app.name, text: app.short_desc || '', url: link }); }
+      catch (e) { /* 用户取消 */ }
+    } else {
+      try {
+        await navigator.clipboard.writeText(link);
+        shareBtn.classList.add('done');
+        setTimeout(() => shareBtn.classList.remove('done'), 1200);
+      } catch (e) { /* 忽略 */ }
+    }
+  });
+
+  // 描述展开/收起
+  const descMore = document.getElementById('descMore');
+  if (descMore) {
+    descMore.addEventListener('click', () => {
+      const t = document.getElementById('descText');
+      const open = t.classList.toggle('open');
+      descMore.textContent = open ? '收起' : '更多';
+    });
+  }
 
   const dock = document.getElementById('dock');
   dock.hidden = false;
