@@ -56,6 +56,25 @@ function noticeHtml() {
     </span></div>`;
 }
 
+/* 广告位：克制的白色卡片，点击新标签打开外部链接 */
+function adHtml() {
+  return `<a class="ad-card" href="https://v.gd/0L3vhl" target="_blank" rel="noopener nofollow">
+    <span class="ad-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+    </span>
+    <span class="ad-body">
+      <span class="ad-title-row">
+        <span class="ad-title">低价机场推荐</span>
+        <span class="ad-tag">广告</span>
+      </span>
+      <span class="ad-desc">包含家宽的低价机场，纯净度不错。</span>
+    </span>
+    <span class="ad-chevron">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </span>
+  </a>`;
+}
+
 /* 公告文字超出一行时：末尾渐隐并允许点击展开全文；不超出则静态展示 */
 function setupNotice() {
   const bar = document.querySelector('.notice-bar');
@@ -71,7 +90,7 @@ function setupNotice() {
 
 function renderFeed() {
   if (!state.list.length) {
-    feedEl.innerHTML = noticeHtml() + `<div class="today-empty">
+    feedEl.innerHTML = noticeHtml() + adHtml() + `<div class="today-empty">
       <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#c7c7cc" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <div style="margin-top:10px">${state.keyword ? '没有找到相关应用' : '暂无应用，请到后台添加'}</div>
     </div>`;
@@ -79,7 +98,7 @@ function renderFeed() {
     return;
   }
 
-  let html = noticeHtml();
+  let html = noticeHtml() + adHtml();
   const headTitle = state.keyword ? `搜索：${esc(state.keyword)}`
     : state.category_id ? '分类应用' : '全部应用';
   html += `<div class="feed-head">
