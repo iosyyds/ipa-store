@@ -2,7 +2,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { API } from '@/lib/api';
-import { formatSize } from '@/lib/utils';
 import Icon from '@/components/Icon';
 import { useToast } from '@/components/ToastProvider';
 
@@ -89,7 +88,6 @@ function CategoryInner() {
                   <h4>{a.name}</h4>
                   <div className="feed-desc">
                     {a.short_desc || a.version || ''}
-                    {a.size ? ` · ${formatSize(a.size)}` : ''}
                   </div>
                 </div>
                 <span className="feed-view">获取</span>

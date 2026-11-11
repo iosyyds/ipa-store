@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API } from '@/lib/api';
-import { formatSize } from '@/lib/utils';
 import Icon from '@/components/Icon';
 import NoticeBar from '@/components/NoticeBar';
 import AdCard from '@/components/AdCard';
@@ -164,7 +163,6 @@ export default function HomePage() {
                   <h4>{a.name}</h4>
                   <div className="feed-desc">
                     {a.short_desc || a.category_name || ''}
-                    {a.size ? ` · ${formatSize(a.size)}` : ''}
                   </div>
                 </div>
                 <span className="feed-view">获取</span>
