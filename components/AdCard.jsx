@@ -2,7 +2,7 @@ export default function AdCard() {
   return (
     <a
       className="ad-card"
-      href="https://v.gd/0L3vhl"
+      href="https://spoo.me/xnyun2027"
       target="_blank"
       rel="noopener nofollow"
     >
