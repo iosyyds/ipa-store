@@ -15,6 +15,7 @@ export default function HomePage() {
 
   const [dateStr, setDateStr] = useState('');
   const [notice, setNotice] = useState('');
+  const [adEnabled, setAdEnabled] = useState(true);
   const [cats, setCats] = useState([]);
   const [categoryId, setCategoryId] = useState('');
   const [search, setSearch] = useState('');
@@ -36,6 +37,7 @@ export default function HomePage() {
       try {
         const settings = await API.settings();
         setNotice(settings.notice || '');
+        setAdEnabled(settings.ad_enabled !== '0');
         setCats(await API.categories());
       } catch (e) {
         /* 分类加载失败不阻断列表 */
@@ -128,7 +130,7 @@ export default function HomePage() {
       </div>
 
       <NoticeBar text={notice} />
-      <AdCard />
+      {adEnabled && <AdCard />}
 
       {error ? (
         <div className="today-empty">
