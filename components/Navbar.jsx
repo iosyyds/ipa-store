@@ -1,9 +1,13 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { loggedIn } = useAuth();
+  // 详情页自带返回按钮与下载栏，不显示全局导航
+  if (pathname.startsWith('/app')) return null;
   return (
     <nav className="navbar">
       <div className="container">
