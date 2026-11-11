@@ -381,7 +381,7 @@ tr:last-child td { border-bottom: none; }
   border: 0.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 22px 22px 0 0;
   box-shadow: var(--shadow-lg);
-  animation: slide-up .28px cubic-bezier(.2, .8, .3, 1);
+  animation: slide-up .28s cubic-bezier(.2, .8, .3, 1);
 }
 .sheet-head { padding: 20px 22px 6px; text-align: center; }
 .sheet-head h3 { font-size: 17px; font-weight: 700; }
@@ -403,7 +403,7 @@ tr:last-child td { border-bottom: none; }
 .toast.success { background: rgba(48, 209, 88, .95); }
 
 @keyframes fade { from { opacity: 0; } }
-@keyframes slide-up { animation: slide-up .28s cubic-bezier(.2, .8, .3, 1); }
+@keyframes slide-up { from { transform: translateY(100%); } }
 @keyframes toast-in { from { opacity: 0; transform: translate(-50%, -12px); } }
 
 /* ============ 桌面端适配 ============ */
@@ -426,7 +426,7 @@ tr:last-child td { border-bottom: none; }
 /* ============================================================
    Today Feed（App Store 今日页风格）
    ============================================================ */
-.today-wrap { max-width: 720; margin: 0 auto; padding: 0 20px 104px; }
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 104px; }
 
 /* 日期 + Today 大标题 */
 .today-date { color: var(--blue); font-size: 13px; font-weight: 700; margin-top: 24px; letter-spacing: .2px; }
@@ -466,7 +466,7 @@ tr:last-child td { border-bottom: none; }
 .grad-0 { background: linear-gradient(150deg, #5a7df4, #7b52d6 60%, #9546b8); }
 .grad-1 { background: linear-gradient(150deg, #ff8a5b, #f25c78 55%, #c2468f); }
 .grad-2 { background: linear-gradient(150deg, #22c1a3, #16a6c9 55%, #2b7fd6); }
-.grad-3 { background: linear-gradient(150deg, #ffb648, #ff8a3d, 55%, #f26a4b); }
+.grad-3 { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
 .grad-4 { background: linear-gradient(150deg, #6a82fb, #5b6cf0 55%, #4854c9); }
 
 /* 精选横向滚动卡片 */
@@ -533,7 +533,7 @@ tr:last-child td { border-bottom: none; }
 .related-wrap { margin: 22px 0 10px; }
 .related-scroll {
   display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 10px;
-  scrollbar-width: none;
+  scrollbar-width: 100%;
 }
 .related-scroll::-webkit-scrollbar { display: none; }
 .related-card {
@@ -581,12 +581,12 @@ tr:last-child td { border-bottom: none; }
 .cat-grad-2  { background: linear-gradient(150deg, #22c1a3, #16a6c9 55%, #2b7fd6); }
 .cat-grad-3  { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
 .cat-grad-4  { background: linear-gradient(150deg, #34c759, #30b0c7 60%, #0a84ff); }
-.cat-grad-5  { background: linear-gradient(150deg, #bf5af2, #8944d6 55%, #949230, 55%, #5e5ce6); }
+.cat-grad-5  { background: linear-gradient(150deg, #bf5af2, #8944d6 55%, #5e5ce6); }
 .cat-grad-6  { background: linear-gradient(150deg, #ff6482, #ff375f 55%, #d70021); }
 .cat-grad-7  { background: linear-gradient(150deg, #64d2ff, #0a84ff 55%, #0040df); }
 .cat-grad-8  { background: linear-gradient(150deg, #ffd60a, #ff9f0a 55%, #ff6b00); }
-.cat-grad-9  { background: linear-gradient(150deg, #949230, 55%, #5e5ce6, #545214, 55%, #1d1b8f); }
-.cat-grad-10 { background: linear-gradient(150deg, #43212c, 150deg, #30166a 55%, #0f7b75); }
+.cat-grad-9  { background: linear-gradient(150deg, #5e5ce6, #3634d6 55%, #1d1b8f); }
+.cat-grad-10 { background: linear-gradient(150deg, #2bd4c7, #1ea6a6 55%, #0f7b75); }
 .cat-grad-11 { background: linear-gradient(150deg, #ff9ea6, #f25c8a 55%, #b83a78); }
 
 /* ============================================================
