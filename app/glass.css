@@ -1,0 +1,241 @@
+/* ============================================================
+ * glass.css —— 液态玻璃（Liquid Glass）主题层
+ * 在 style.css / feed.css 之后加载，统一所有表面与按钮的
+ * 半透明、模糊、边缘高光与柔和投影；保持克制、浅色、移动端优先。
+ * ============================================================ */
+
+:root {
+  --lg-blur: blur(24px) saturate(180%);
+  --lg-blur-strong: blur(34px) saturate(200%);
+  --lg-fill: rgba(255, 255, 255, .55);
+  --lg-fill-2: rgba(255, 255, 255, .68);
+  --lg-fill-3: rgba(255, 255, 255, .8);
+  --lg-rim: .5px solid rgba(255, 255, 255, .6);
+  --lg-drop: 0 12px 32px rgba(28, 38, 88, .14);
+  --lg-drop-sm: 0 6px 18px rgba(28, 38, 88, .12);
+  --lg-inner:
+    inset 0 1px 1px rgba(255, 255, 255, .95),
+    inset 0 0 0 .5px rgba(255, 255, 255, .55),
+    inset 0 -10px 18px rgba(255, 255, .16);
+  --lg-blue: rgba(10, 132, 255, .78);
+  --lg-amber: rgba(255, 159, 10, .8);
+}
+
+/* ---------- 页面：浅色基底 + 柔和光斑（玻璃需要可折射的背景） ---------- */
+body { background: #e8ecf4; }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(330px 330px at 10% 6%, rgba(120, 150, 255, .34), transparent 70%),
+    radial-gradient(390px 390px at 90% 16%, rgba(188, 150, 255, .30), transparent 70%),
+    radial-gradient(430px 430px at 72% 94%, rgba(118, 218, 208, .27), transparent 70%),
+    radial-gradient(300px 300px at 18% 86%, rgba(255, 182, 202, .24), transparent 70%);
+}
+
+/* ---------- 中性玻璃表面 ---------- */
+.app-list, .detail-metrics, .text-block, .card,
+.login-card, .list-card, .ad-card, .notice-bar {
+  background: var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: var(--lg-rim);
+  box-shadow: var(--lg-inner), var(--lg-drop);
+}
+.list-card { background: var(--lg-fill-2); }
+.text-block, .card { background: var(--lg-fill-2); }
+
+/* 列表行保持通透，仅按压时给玻璃高光，避免嵌套模糊 */
+.app-row, .feed-row { background: transparent; }
+.app-row:active, .feed-row:active { background: rgba(255, 255, .35); }
+
+/* ---------- 顶部导航 / 底部 Tab / 下载栏 ---------- */
+.navbar, .tabbar, .dock {
+  background: rgba(255, 255, 255, .55);
+  -webkit-backdrop-filter: var(--lg-blur-strong);
+  backdrop-filter: var(--lg-blur-strong);
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
+  border: var(--lg-rim);
+}
+.navbar { border-top: none; border-left: none; border-right: none; }
+.tabbar { border-radius: 28px; }
+.tab-item { border-radius: 20px; }
+.tab-item.active {
+  background: rgba(10, 132, 255, .16);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .8);
+}
+
+/* ---------- 按钮：通用玻璃 ---------- */
+.btn-ghost, .more-btn, .back-btn, .back-fab,
+.hero-share, .search-clear, .chip {
+  background: var(--lg-fill-2);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: var(--lg-rim);
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
+  transition: transform .12s, box-shadow .15s, background .15s;
+}
+.btn-ghost:active, .more-btn:active, .back-btn:active,
+.back-fab:active, .hero-share:active, .search-clear:active, .chip:active {
+  transform: scale(.94);
+  background: var(--lg-fill-3);
+}
+
+/* ---------- 按钮：蓝色 / 琥珀色玻璃（主操作） ---------- */
+.btn-primary, .get-btn, .feed-view {
+  background: var(--lg-blue);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  color: #fff;
+  border: .5px solid rgba(255, 255, 255, .45);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, .6),
+    inset 0 0 0 .5px rgba(255, 255, 255, .3),
+    0 8px 22px rgba(10, 132, 255, .32);
+  transition: transform .12s, background .15s;
+}
+.btn-primary:active, .get-btn:active, .feed-view:active {
+  transform: scale(.95);
+  background: rgba(10, 132, 255, .9);
+}
+.get-btn.lock {
+  background: var(--lg-amber);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, .6),
+    0 8px 22px rgba(255, 159, 10, .3);
+}
+
+/* 分段控件：凹槽轨道 + 凸起玻璃片 */
+.seg {
+  background: rgba(120, 128, 150, .18);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .12);
+}
+.seg button {
+  border: .5px solid transparent;
+  transition: all .15s;
+}
+.seg button.active {
+  background: var(--lg-fill-3);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: var(--lg-rim);
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
+}
+
+/* 分类 chip：未选中中性玻璃，选中蓝色玻璃 */
+.chip.active {
+  background: var(--lg-blue);
+  color: #fff;
+  border: .5px solid rgba(255, 255, 255, .45);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5), var(--lg-drop-sm);
+}
+
+/* ---------- 输入框：玻璃凹槽 ---------- */
+.input, .search-input, textarea.input {
+  background: rgba(255, 255, 255, .6);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: .5px solid rgba(255, 255, .7);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, .06),
+    inset 0 0 0 .5px rgba(255, 255, 255, .4);
+  transition: box-shadow .15s, background .15s;
+}
+.input:focus, .search-input:focus, textarea.input:focus {
+  background: rgba(255, 255, 255, .82);
+  box-shadow: 0 0 0 3.5px rgba(10, 132, 255, .18), inset 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+/* ---------- 公告：琥珀色玻璃 ---------- */
+.notice-bar {
+  background: rgba(255, 159, 10, .22);
+  border: .5px solid rgba(255, 200, 120, .5);
+}
+.notice-icon {
+  background: rgba(255, 159, 10, .3);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .6);
+}
+
+/* ---------- 广告位图标 ---------- */
+.ad-icon {
+  background: rgba(10, 132, 255, .2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .6);
+}
+
+/* ---------- 遮罩与底部弹层 ---------- */
+.mask {
+  background: rgba(24, 30, 60, .24);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+}
+.sheet {
+  background: rgba(255, 255, 255, .7);
+  -webkit-backdrop-filter: var(--lg-blur-strong);
+  backdrop-filter: var(--lg-blur-strong);
+  border: .5px solid rgba(255, 255, 255, .65);
+  box-shadow: var(--lg-inner), 0 20px 50px rgba(20, 28, 70, .25);
+}
+.sheet-foot button { border: .5px solid transparent; }
+.sheet-foot button.primary { color: var(--blue); }
+
+/* Toast：深色玻璃 */
+.toast {
+  background: rgba(28, 30, 38, .72);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: .5px solid rgba(255, 255, 255, .14);
+}
+
+/* ---------- 彩色玻璃表面（渐变类 → 半透明 tint） ---------- */
+.grad-0, .grad-1, .grad-2, .grad-3, .grad-4,
+.cat-grad-0, .cat-grad-1, .cat-grad-2, .cat-grad-3, .cat-grad-4,
+.cat-grad-5, .cat-grad-6, .cat-grad-7, .cat-grad-8, .cat-grad-9,
+.cat-grad-10, .cat-grad-11 {
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: .5px solid rgba(255, 255, 255, .4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .14);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, .55),
+    inset 0 0 0 .5px rgba(255, 255, 255, .3),
+    var(--lg-drop);
+}
+.grad-0 { background: linear-gradient(150deg, rgba(90,125,244,.66), rgba(123,82,214,.66) 60%, rgba(149,70,184,.66)); }
+.grad-1 { background: linear-gradient(150deg, rgba(255,138,91,.66), rgba(242,92,120,.66) 55%, rgba(194,70,143,.66)); }
+.grad-2 { background: linear-gradient(150deg, rgba(34,193,163,.66), rgba(22,166,201,.66) 55%, rgba(43,127,214,.66)); }
+.grad-3 { background: linear-gradient(150deg, rgba(255,182,72,.68), rgba(255,138,61,.68) 55%, rgba(242,106,75,.68)); }
+.grad-4 { background: linear-gradient(150deg, rgba(106,130,251,.66), rgba(91,108,240,.66) 55%, rgba(72,84,201,.66)); }
+
+.cat-grad-0  { background: linear-gradient(150deg, rgba(90,125,244,.62), rgba(123,82,214,.62) 60%, rgba(149,70,184,.62)); }
+.cat-grad-1  { background: linear-gradient(150deg, rgba(255,138,91,.62), rgba(242,92,120,.62) 55%, rgba(194,70,143,.62)); }
+.cat-grad-2  { background: linear-gradient(150deg, rgba(34,193,163,.62), rgba(22,166,201,.62) 55%, rgba(43,127,214,.62)); }
+.cat-grad-3  { background: linear-gradient(150deg, rgba(255,182,72,.64), rgba(255,138,61,.64) 55%, rgba(242,106,75,.64)); }
+.cat-grad-4  { background: linear-gradient(150deg, rgba(52,199,89,.62), rgba(48,176,199,.62) 60%, rgba(10,132,255,.62)); }
+.cat-grad-5  { background: linear-gradient(150deg, rgba(191,90,242,.62), rgba(137,68,214,.62) 55%, rgba(94,92,230,.62)); }
+.cat-grad-6  { background: linear-gradient(150deg, rgba(255,100,130,.62), rgba(255,55,95,.62) 55%, rgba(215,0,21,.62)); }
+.cat-grad-7  { background: linear-gradient(150deg, rgba(100,210,255,.62), rgba(10,132,255,.62) 55%, rgba(0,64,223,.62)); }
+.cat-grad-8  { background: linear-gradient(150deg, rgba(255,214,10,.64), rgba(255,159,10,.64) 55%, rgba(255,107,0,.64)); }
+.cat-grad-9  { background: linear-gradient(150deg, rgba(94,92,230,.62), rgba(54,52,214,.62) 55%, rgba(29,27,143,.62)); }
+.cat-grad-10 { background: linear-gradient(150deg, rgba(43,212,199,.62), rgba(30,166,166,.62) 55%, rgba(15,123,117,.62)); }
+.cat-grad-11 { background: linear-gradient(150deg, rgba(255,158,166,.62), rgba(242,92,138,.62) 55%, rgba(184,58,120,.62)); }
+
+/* ---------- 标签 / 头像 / 占位 ---------- */
+.tag {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: .5px solid rgba(255, 255, 255, .5);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .55);
+}
+.profile-avatar, .login-logo, .brand .mark {
+  border: .5px solid rgba(255, 255, 255, .6);
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
+}
+.app-icon.ph, .feed-icon.ph, .related-icon.ph, .hero-icon.ph {
+  background: rgba(140, 148, 170, .22);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+/* 相关卡片点击玻璃高光 */
+.related-card:active { background: rgba(255, 255, 255, .32); }
+
+/* 表格保持通透 */
+.resp-table tr, .resp-table td { background: transparent; }
