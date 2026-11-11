@@ -31,6 +31,8 @@ const ITEMS = [
 
 export default function Tabbar() {
   const pathname = usePathname();
+  // 详情页使用自带下载栏，不显示全局 Tab
+  if (pathname.startsWith('/app')) return null;
   return (
     <nav className="tabbar">
       {ITEMS.map((it) => (
