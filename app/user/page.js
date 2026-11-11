@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API } from '@/lib/api';
-import { isLoggedIn, userLogout } from '@/lib/auth';
+import { isLoggedIn, userLogout, clearSession } from '@/lib/auth';
 import { useToast } from '@/components/ToastProvider';
 
 function LicStatusTag({ l }) {
@@ -43,6 +43,12 @@ export default function UserPage() {
         setLicenses(lic);
         setLogs(lg);
       } catch (e) {
+        // 登录态失效（401）：清掉过期令牌并回到登录页，避免停留在无入口的错误页
+        if (e.status === 401 || e.code === 401) {
+          clearSession();
+          router.replace('/login?redirect=' + encodeURIComponent('/user'));
+          return;
+        }
         setError(e.message);
       }
     })();
@@ -78,7 +84,21 @@ export default function UserPage() {
   }
 
   if (!ready) return <div className="empty">加载中…</div>;
-  if (error) return <div className="empty">加载失败：{error}</div>;
+  if (error) return (
+    <div className="empty">
+      <div>加载失败：{error}</div>
+      <button
+        className="btn btn-primary"
+        style={{ marginTop: 16 }}
+        onClick={() => {
+          clearSession();
+          router.replace('/login?redirect=' + encodeURIComponent('/user'));
+        }}
+      >
+        去登录
+      </button>
+    </div>
+  );
   if (!profile) return <div className="empty">加载中…</div>;
 
   return (
