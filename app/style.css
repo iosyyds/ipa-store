@@ -22,7 +22,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue',
+  font-family: -apple-system, BlinkSystemFont, 'PingFang SC', 'Helvetica Neue',
     'Microsoft YaHei', 'Segoe UI', sans-serif;
   color: var(--text);
   background: var(--bg);
@@ -253,7 +253,7 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
 }
 .login-logo img { width: 100%; height: 100%; }
 .login-card h1 { text-align: center; font-size: 21px; font-weight: 700; }
-.login-card > p { text-align: center; color: var(--text-2); margin: 5px 0 20px; font-size: 13px; }
+.login-card > p { text-align: center; color: var(--text-2); font-size: 13px; margin: 5px 0 20px; }
 .seg { display: flex; background: rgba(120, 120, 128, 0.12); border-radius: 10px; padding: 2.5px; margin-bottom: 20px; }
 .seg button { flex: 1; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--text-2); transition: all .15s; }
 .seg button.active { background: #fff; color: var(--text); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
@@ -400,7 +400,7 @@ tr:last-child td { border-bottom: none; }
   animation: toast-in .3s; max-width: 88%; text-align: center;
 }
 .toast.error { background: rgba(255, 59, 48, .95); }
-.toast.success { background: rgba(48, 209, 88, .95); }
+.toast.success { background: rgba(48, 209, 89, .95); }
 
 @keyframes fade { from { opacity: 0; } }
 @keyframes slide-up { from { transform: translateY(100%); } }
@@ -414,7 +414,7 @@ tr:last-child td { border-bottom: none; }
   .login-wrap { min-height: 70vh; }
   .mask { align-items: center; }
   .sheet { border-radius: 22px; }
-  @keyframes slide-up { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes slide-up { from { opacity: 16px; } }
   .dock { bottom: 0; }
   .profile-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -453,6 +453,7 @@ tr:last-child td { border-bottom: none; }
   transition: transform .12s, background .15s;
 }
 .search-clear:active { transform: translateY(-50%) scale(0.9); background: #8e8e93; }
+.search-clear[hidden] { display: none; }
 
 /* 分类横向滚动（复用 chip） */
 .today-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 8px; margin-bottom: 18px; scrollbar-width: none; scroll-margin-top: 64px; }
