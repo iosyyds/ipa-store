@@ -123,12 +123,13 @@ body::before {
   box-shadow: var(--lg-inner), var(--lg-drop-sm);
 }
 
-/* 分类 chip：未选中中性玻璃，选中蓝色玻璃 */
+/* 分类 chip：扁平无阴影（保留玻璃填充与边框） */
+.chip { box-shadow: none; }
 .chip.active {
   background: var(--lg-blue);
   color: #fff;
   border: .5px solid rgba(255, 255, 255, .45);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5), var(--lg-drop-sm);
+  box-shadow: none;
 }
 
 /* ---------- 输入框：玻璃凹槽 ---------- */
