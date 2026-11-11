@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { ToastProvider } from './ToastProvider';
 import { SheetProvider } from './SheetProvider';
+import ErrorBoundary from './ErrorBoundary';
 import { usePreventZoom } from '@/lib/auth';
 
 export default function Providers({ children }) {
@@ -9,8 +10,10 @@ export default function Providers({ children }) {
     usePreventZoom();
   }, []);
   return (
-    <ToastProvider>
-      <SheetProvider>{children}</SheetProvider>
-    </ToastProvider>
+    <ErrorBoundary>
+      <ToastProvider>
+        <SheetProvider>{children}</SheetProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   );
 }
