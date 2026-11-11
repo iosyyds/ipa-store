@@ -122,7 +122,7 @@ export default function UserPage() {
           </div>
           <div className="profile-rows">
             <div className="profile-row">
-              <svg className="pr-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 1.6 7.6 5.4 7.6-5.4H4.4zM4 8 2V17.4h16V8.2l-8 5.7-8-5.7z" /></svg>
+              <svg className="pr-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 1.6 7.6 5.4 7.6-5.4H4.4zM4 8.2V17.4h16V8.2l-8 5.7-8-5.7z" /></svg>
               <span className="pr-text">{profile.email || '未绑定邮箱'}</span>
             </div>
             <div className="profile-row">
