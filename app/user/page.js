@@ -21,6 +21,7 @@ export default function UserPage() {
   const [profile, setProfile] = useState(null);
   const [licenses, setLicenses] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [logLimit, setLogLimit] = useState(10); // 下载记录每页 10 条，前端分页
 
   const [redeemCode, setRedeemCode] = useState('');
   const [oldP, setOldP] = useState('');
@@ -121,7 +122,7 @@ export default function UserPage() {
           </div>
           <div className="profile-rows">
             <div className="profile-row">
-              <svg className="pr-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 1.6 7.6 5.4 7.6-5.4H4.4zM4 8.2V17.4h16V8.2l-8 5.7-8-5.7z" /></svg>
+              <svg className="pr-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.4 1.6 7.6 5.4 7.6-5.4H4.4zM4 8 2V17.4h16V8.2l-8 5.7-8-5.7z" /></svg>
               <span className="pr-text">{profile.email || '未绑定邮箱'}</span>
             </div>
             <div className="profile-row">
@@ -199,7 +200,7 @@ export default function UserPage() {
               <tr><th>时间</th><th>应用</th><th>方式</th><th>IP</th></tr>
             </thead>
             <tbody>
-              {logs.length ? logs.map((l, i) => (
+              {logs.length ? logs.slice(0, logLimit).map((l, i) => (
                 <tr key={i}>
                   <td className="muted" data-label="时间">{l.created_at}</td>
                   <td data-label="应用">{l.app_name || '—'}</td>
@@ -216,6 +217,13 @@ export default function UserPage() {
             </tbody>
           </table>
         </div>
+        {logs.length > logLimit && (
+          <div className="table-more">
+            <button className="more-btn" onClick={() => setLogLimit((v) => v + 10)}>
+              加载更多（剩余 {logs.length - logLimit} 条）
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
