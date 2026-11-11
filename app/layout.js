@@ -25,7 +25,7 @@ export const metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBar: 'default',
+    statusBarStyle: 'default',
     title: '甜甜',
   },
   openGraph: {
@@ -51,6 +51,7 @@ export default function RootLayout({ children }) {
     <html lang="zh-CN">
       <head>
         <meta httpEquiv="Content-Security-Policy" content={CSP} />
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body>
         <Providers>

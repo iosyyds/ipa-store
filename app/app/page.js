@@ -113,7 +113,8 @@ function DetailInner() {
   }, [app]);
 
   async function onShare() {
-    const link = window.location.href;
+    // 永久直链（/d/ 实时签名、不过期），符合「复制链接」式永久直链需求
+    const link = app.ipa_file || window.location.href;
     if (navigator.share) {
       try { await navigator.share({ title: app.name, text: app.short_desc || '', url: link }); }
       catch (e) { /* 用户取消 */ }
