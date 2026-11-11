@@ -14,23 +14,36 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build static export
         run: npm run build
-      - name: Deploy build to main
+
+      - name: Checkout main into site
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          clean: false
+
+      - name: Replace site content with build output
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git clone --depth 1 --branch main "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" site
           find site -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           cp -r out/. site/
+
+      - name: Commit and push to main
+        run: |
           cd site
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
           git add -A
-          git commit -m "chore: deploy static build [skip ci]" || echo "no changes"
+          git commit -m "chore: deploy static build [skip ci]" || echo "no changes to commit"
           git push origin HEAD:main
