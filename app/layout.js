@@ -1,5 +1,6 @@
 import './style.css';
 import './feed.css';
+import './glass.css';
 import Navbar from '@/components/Navbar';
 import Tabbar from '@/components/Tabbar';
 import Providers from '@/components/Providers';
@@ -24,7 +25,7 @@ export const metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBar: 'default',
     title: '甜甜',
   },
   openGraph: {
