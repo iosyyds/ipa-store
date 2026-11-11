@@ -414,8 +414,7 @@ tr:last-child td { border-bottom: none; }
   .login-wrap { min-height: 70vh; }
   .mask { align-items: center; }
   .sheet { border-radius: 22px; }
-  @keyframes slide-up { from { opacity: 0; transform: translateY(16px); }
-  }
+  @keyframes slide-up { from { opacity: 0; transform: translateY(16px); } }
   .dock { bottom: 0; }
   .profile-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -437,7 +436,7 @@ tr:last-child td { border-bottom: none; }
 .today-search { position: relative; margin-bottom: 20px; }
 .today-search > svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); }
 .today-search .search-input {
-  width: 100%; padding: 13px 40px 13px 42px;
+  margin: 0; padding: 13px 40px 13px 42px;
   border-radius: 14px; border: 0.5px solid rgba(60,60,67,.1);
   background: rgba(255,255,255,.92);
   box-shadow: 0 2px 10px rgba(0,0,0,.04);
@@ -504,13 +503,12 @@ tr:last-child td { border-bottom: none; }
 .list-card { background: #fff; padding: 6px 16px; }
 
 /* 列表行 */
-.feed-row { display: flex; align-items: center; gap: 13px; padding: 11px 4px; border-radius: 12px; border-top: 0.5px solid var(--line); }
+.feed-row { display: flex; align-items: center; gap: 13px; padding: 11px 4px; border-radius: 12px; border-top: 0.5px solid var(--line); transition: background .15s; }
 .feed-row:first-child { border-top: none; }
 .feed-row:active { background: rgba(60, 60, 67, 0.06); }
-.feed-row .feed-icon { width: 56px; height: 56px; border-radius: 14px; overflow: hidden; background: #e5e5e5e5ea; flex: none; }
-.feed-row .feed-icon img { width: 100%; height: 100%; object-fit: cover; }
+.feed-row .feed-icon { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; background: #e5e5ea; flex: none; }
 .feed-row .feed-icon.ph { display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 12px; }
-.feed-meta { flex: 1; min-width: 0; }
+.feed-row .feed-meta { flex: 1; min-width: 0; }
 .feed-row h4 { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .feed-row .feed-desc { font-size: 12px; color: var(--text-2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .feed-view { flex: none; padding: 7px 18px; border-radius: 980px; background: rgba(10, 132, 255, .12); color: var(--blue); font-size: 13.5px; font-weight: 700; transition: transform .12s, background .15s; }
