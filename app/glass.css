@@ -8,9 +8,9 @@
   --lg-blur: blur(24px) saturate(180%);
   --lg-blur-strong: blur(34px) saturate(200%);
   --lg-fill: rgba(255, 255, 255, .55);
-  --lg-fill-2: rgba(255, 255, .68);
-  --lg-fill-3: rgba(255, 255, .8);
-  --lg-rim: .5px solid rgba(255, 255, .6);
+  --lg-fill-2: rgba(255, 255, 255, .68);
+  --lg-fill-3: rgba(255, 255, 255, .8);
+  --lg-rim: .5px solid rgba(255, 255, 255, .6);
   --lg-drop: 0 12px 32px rgba(28, 38, 88, .14);
   --lg-drop-sm: 0 6px 18px rgba(28, 38, 88, .12);
   --lg-inner:
