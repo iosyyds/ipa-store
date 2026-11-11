@@ -341,7 +341,7 @@ tr:last-child td { border-bottom: none; }
 @media (max-width: 699px) {
   .resp-table thead { display: none; }
   .resp-table tr { display: block; padding: 12px 14px; border-bottom: 0.5px solid var(--line); }
-  .resp-table tr:last-child { border-bottom: none; }
+  .resp-table tr:last-child { border-bottom: 0.5px solid var(--line); }
   .resp-table td {
     display: flex; justify-content: space-between; align-items: center;
     gap: 16px; padding: 6px 0; border-bottom: none; font-size: 13px; text-align: right;
@@ -413,7 +413,7 @@ tr:last-child td { border-bottom: none; }
   animation: toast-in .3s; max-width: 88%; text-align: center;
 }
 .toast.error { background: rgba(255, 59, 48, .95); }
-.toast.success { background: rgba(48, 209, 89, .95); }
+.toast.success { background: rgba(48, 209, 88, .95); }
 
 @keyframes fade { from { opacity: 0; } }
 @keyframes slide-up { from { transform: translateY(100%); } }
@@ -427,7 +427,7 @@ tr:last-child td { border-bottom: none; }
   .login-wrap { min-height: 70vh; }
   .mask { align-items: center; }
   .sheet { border-radius: 22px; }
-  @keyframes slide-up { from { opacity: 0; transform: translateY(16px); }
+  @keyframes slide-up { from { opacity: 0; transform: translateY(16px); } }
   .dock { bottom: 0; }
   .profile-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -478,10 +478,10 @@ tr:last-child td { border-bottom: none; }
 
 /* Hero 渐变背景（JS 轮换） */
 .grad-0 { background: linear-gradient(150deg, #5a7df4, #7b52d6 60%, #9546b8); }
-.grad-1 { background: linear-gradient(150deg, #ff8a5b, #f25c78, #c2468f); }
-.grad-2 { background: linear-gradient(150deg, #22c1a3, #16a6c9, #2b7fd6); }
-.grad-3 { background: linear-gradient(150deg, #ffb648, #ff8a3d, #f26a4b); }
-.grad-4 { background: linear-gradient(150deg, #6a82fb, #5b6cf0, #4854c9); }
+.grad-1 { background: linear-gradient(150deg, #ff8a5b, #f25c78 55%, #c2468f); }
+.grad-2 { background: linear-gradient(150deg, #22c1a3, #16a6c9 55%, #2b7fd6); }
+.grad-3 { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
+.grad-4 { background: linear-gradient(150deg, #6a82fb, #5b6cf0 55%, #4854c9); }
 
 /* 精选横向滚动卡片 */
 .feature-scroll {
@@ -589,22 +589,22 @@ tr:last-child td { border-bottom: none; }
 .cat-card-icon { align-self: flex-end; width: 34px; height: 34px; opacity: .92; }
 .cat-card-icon svg { width: 100%; height: 100%; }
 .cat-card-icon img { width: 34px; height: 34px; border-radius: 9px; object-fit: cover; }
-.cat-card-name { font-size: 20px; font-weight: 800; letter-spacing: -.3px; }
+.cat-card-name { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
 .cat-card-count { font-size: 12.5px; opacity: .85; margin-top: 2px; }
 
 /* 分类渐变（12 色循环） */
 .cat-grad-0  { background: linear-gradient(150deg, #5a7df4, #7b52d6 60%, #9546b8); }
-.cat-grad-1  { background: linear-gradient(150deg, #ff8a5b, #f25c78, #c2468f); }
-.cat-grad-2  { background: linear-gradient(150deg, #22c1a3, #16a6c9, #2b7fd6); }
-.cat-grad-3  { background: linear-gradient(150deg, #ffb648, #ff8a3d, #f26a4b); }
-.cat-grad-4  { background: linear-gradient(150deg, #34c759, #30b0c7, #0a84ff); }
-.cat-grad-5  { background: linear-gradient(150deg, #bf5af2, #8944d6, #5e5ce6); }
-.cat-grad-6  { background: linear-gradient(150deg, #ff6482, #ff375f, #d70015); }
-.cat-grad-7  { background: linear-gradient(150deg, #64d2ff, #0a84ff, #0040df); }
-.cat-grad-8  { background: linear-gradient(150deg, #ffd60a, #ff9f0a, #ff6b00); }
-.cat-grad-9  { background: linear-gradient(150deg, #5e5ce6, #3634d6, #1d1b8f); }
-.cat-grad-10 { background: linear-gradient(150deg, #2bd4c7, #1ea6a6, #0f7b75); }
-.cat-grad-11 { background: linear-gradient(150deg, #ff9ea6, #f25c8a, #b83a78); }
+.cat-grad-1  { background: linear-gradient(150deg, #ff8a5b, #f25c78 55%, #c2468f); }
+.cat-grad-2  { background: linear-gradient(150deg, #22c1a3, #16a6c9 55%, #2b7fd6); }
+.cat-grad-3  { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
+.cat-grad-4  { background: linear-gradient(150deg, #34c759, #30b0c7 60%, #0a84ff); }
+.cat-grad-5  { background: linear-gradient(150deg, #bf5af2, #8944d6 55%, #5e5ce6); }
+.cat-grad-6  { background: linear-gradient(150deg, #ff6482, #ff375f 55%, #d70015); }
+.cat-grad-7  { background: linear-gradient(150deg, #64d2ff, #0a84ff 55%, #0040df); }
+.cat-grad-8  { background: linear-gradient(150deg, #ffd60a, #ff9f0a 55%, #ff6b00); }
+.cat-grad-9  { background: linear-gradient(150deg, #5e5ce6, #3634d6 55%, #1d1b8f); }
+.cat-grad-10 { background: linear-gradient(150deg, #2bd4c7, #1ea6a6 55%, #0f7b75); }
+.cat-grad-11 { background: linear-gradient(150deg, #ff9ea6, #f25c8a 55%, #b83a78); }
 
 /* ============================================================
    分类内页
