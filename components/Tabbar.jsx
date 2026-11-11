@@ -33,12 +33,20 @@ export default function Tabbar() {
   const pathname = usePathname();
   // 详情页使用自带下载栏，不显示全局 Tab
   if (pathname.startsWith('/app')) return null;
+  // 归一化：去掉结尾斜杠，根路径保持 '/'（trailingSlash 下 usePathname 可能带尾斜杠）
+  const norm = pathname === '/' ? '/' : pathname.replace(/\/+$/, '');
+  const isActive = (href) => {
+    if (href === '/') return norm === '/';
+    if (href === '/categories') return norm === '/categories' || norm.startsWith('/category');
+    if (href === '/user') return norm === '/user' || norm === '/login';
+    return norm === href;
+  };
   return (
     <nav className="tabbar">
       {ITEMS.map((it) => (
         <Link
           key={it.href}
-          className={'tab-item' + (pathname === it.href ? ' active' : '')}
+          className={'tab-item' + (isActive(it.href) ? ' active' : '')}
           href={it.href}
         >
           {it.icon}
