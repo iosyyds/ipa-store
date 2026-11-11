@@ -961,7 +961,7 @@ body::before {
   box-shadow: var(--lg-inner), var(--lg-drop-sm);
   transition: transform .12s, box-shadow .15s, background .15s;
 }
-.btn-ghost:active, .more-btn, .back-btn:active,
+.btn-ghost:active, .more-btn:active, .back-btn:active,
 .back-fab:active, .hero-share:active, .hero-back:active, .search-clear:active, .chip:active {
   transform: scale(.94);
   background: var(--lg-fill-3);
@@ -986,7 +986,7 @@ body::before {
   border: .5px solid rgba(255, 255, 255, .45);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, .6),
-    inset 0 0 0 .5px rgba(255, 255, 255, .3),
+    inset 0 0 0 .5px rgba(255, 255, .3),
     0 8px 22px rgba(10, 132, 255, .32);
   transition: transform .12s, background .15s;
 }
@@ -1083,7 +1083,7 @@ body::before {
 
 /* ---------- 彩色玻璃表面（渐变类 → 半透明 tint） ---------- */
 .grad-0, .grad-1, .grad-2, .grad-3, .grad-4,
-.cat-grad-0, .cat-grad1, .cat-grad-2, .cat-grad-3, .cat-grad-4,
+.cat-grad-0, .cat-grad-1, .cat-grad-2, .cat-grad-3, .cat-grad-4,
 .cat-grad-5, .cat-grad-6, .cat-grad-7, .cat-grad-8, .cat-grad-9,
 .cat-grad-10, .cat-grad-11 {
   -webkit-backdrop-filter: var(--lg-blur);
