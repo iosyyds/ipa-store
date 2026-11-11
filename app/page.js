@@ -8,7 +8,7 @@ import NoticeBar from '@/components/NoticeBar';
 import AdCard from '@/components/AdCard';
 import { useToast } from '@/components/ToastProvider';
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = 10;
 
 export default function HomePage() {
   const toast = useToast();

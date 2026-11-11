@@ -15,10 +15,11 @@
   --lg-drop-sm: 0 6px 18px rgba(28, 38, 88, .12);
   --lg-inner:
     inset 0 1px 1px rgba(255, 255, 255, .95),
-    inset 0 0 0 .5px rgba(255, 255, 255, .55),
+    inset 0 0 0 .5px rgba(255, 255, .55),
     inset 0 -10px 18px rgba(255, 255, 255, .14);
   --lg-blue: rgba(10, 132, 255, .78);
   --lg-amber: rgba(255, 159, 10, .8);
+  --lg-indigo: rgba(94, 92, 230, .82);
 }
 
 /* ---------- 页面：浅色基底 + 柔和光斑（玻璃需要可折射的背景） ---------- */
@@ -61,14 +62,15 @@ body::before {
 .navbar { border-top: none; border-left: none; border-right: none; }
 .tabbar { border-radius: 28px; }
 .tab-item { border-radius: 20px; }
+/* iOS 风格：无胶囊背景，选中纯蓝、未选中灰，干净克制 */
 .tab-item.active {
-  background: rgba(10, 132, 255, .16);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .8);
+  background: transparent;
+  box-shadow: none;
 }
 
 /* ---------- 按钮：通用玻璃 ---------- */
 .btn-ghost, .more-btn, .back-btn, .back-fab,
-.hero-share, .search-clear, .chip {
+.hero-share, .hero-back, .search-clear, .chip {
   background: var(--lg-fill-2);
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
@@ -76,8 +78,8 @@ body::before {
   box-shadow: var(--lg-inner), var(--lg-drop-sm);
   transition: transform .12s, box-shadow .15s, background .15s;
 }
-.btn-ghost:active, .more-btn:active, .back-btn:active,
-.back-fab:active, .hero-share:active, .search-clear:active, .chip:active {
+.btn-ghost:active, .more-btn, .back-btn:active,
+.back-fab:active, .hero-share:active, .hero-back:active, .search-clear:active, .chip:active {
   transform: scale(.94);
   background: var(--lg-fill-3);
 }
@@ -110,10 +112,10 @@ body::before {
   background: rgba(10, 132, 255, .9);
 }
 .get-btn.lock {
-  background: var(--lg-amber);
+  background: var(--lg-indigo);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, .6),
-    0 8px 22px rgba(255, 159, 10, .3);
+    0 8px 22px rgba(94, 92, 230, .3);
 }
 
 /* 分段控件：凹槽轨道 + 凸起玻璃片 */
@@ -198,7 +200,7 @@ body::before {
 
 /* ---------- 彩色玻璃表面（渐变类 → 半透明 tint） ---------- */
 .grad-0, .grad-1, .grad-2, .grad-3, .grad-4,
-.cat-grad-0, .cat-grad-1, .cat-grad-2, .cat-grad-3, .cat-grad-4,
+.cat-grad-0, .cat-grad1, .cat-grad-2, .cat-grad-3, .cat-grad-4,
 .cat-grad-5, .cat-grad-6, .cat-grad-7, .cat-grad-8, .cat-grad-9,
 .cat-grad-10, .cat-grad-11 {
   -webkit-backdrop-filter: var(--lg-blur);
@@ -207,7 +209,7 @@ body::before {
   text-shadow: 0 1px 2px rgba(0, 0, 0, .14);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, .55),
-    inset 0 0 0 .5px rgba(255, 255, 255, .3),
+    inset 0 0 0 .5px rgba(255, 255, .3),
     var(--lg-drop);
 }
 .grad-0 { background: linear-gradient(150deg, rgba(90,125,244,.66), rgba(123,82,214,.66) 60%, rgba(149,70,184,.66)); }
@@ -250,3 +252,6 @@ body::before {
 
 /* 表格保持通透 */
 .resp-table tr, .resp-table td { background: transparent; }
+
+/* 下载记录「加载更多」容器 */
+.table-more { text-align: center; padding: 14px 0 18px; }
