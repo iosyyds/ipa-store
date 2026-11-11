@@ -12,7 +12,9 @@ export default function Icon({ app, className = 'feed-icon' }) {
       {!showPh && (
         <img src={src} alt="" loading="lazy" onError={() => setFailed(true)} />
       )}
-      <span className="ph-letter">{firstChar(app && app.name)}</span>
+      {showPh && (
+        <span className="ph-letter">{firstChar(app && app.name)}</span>
+      )}
     </div>
   );
 }
