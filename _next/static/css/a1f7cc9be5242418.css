@@ -534,7 +534,7 @@ tr:last-child td { border-bottom: none; }
 .related-wrap { margin: 22px 0 10px; }
 .related-scroll {
   display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 10px;
-  scrollbar-width: 100%;
+  scrollbar-width: none;
 }
 .related-scroll::-webkit-scrollbar { display: none; }
 .related-card {
@@ -548,7 +548,10 @@ tr:last-child td { border-bottom: none; }
   background: #e5e5ea; margin: 0 auto 8px; display: block;
 }
 .related-icon img { width: 100%; height: 100%; object-fit: cover; }
-.related-icon.ph { display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 12px; }
+.related-icon.ph {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); font-size: 12px;
+}
 .related-name {
   font-size: 12.5px; font-weight: 650; color: var(--text);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -583,7 +586,7 @@ tr:last-child td { border-bottom: none; }
 .cat-grad-3  { background: linear-gradient(150deg, #ffb648, #ff8a3d 55%, #f26a4b); }
 .cat-grad-4  { background: linear-gradient(150deg, #34c759, #30b0c7 60%, #0a84ff); }
 .cat-grad-5  { background: linear-gradient(150deg, #bf5af2, #8944d6 55%, #5e5ce6); }
-.cat-grad-6  { background: linear-gradient(150deg, #ff6482, #ff375f 55%, #d70021); }
+.cat-grad-6  { background: linear-gradient(150deg, #ff6482, #ff375f 55%, #d70015); }
 .cat-grad-7  { background: linear-gradient(150deg, #64d2ff, #0a84ff 55%, #0040df); }
 .cat-grad-8  { background: linear-gradient(150deg, #ffd60a, #ff9f0a 55%, #ff6b00); }
 .cat-grad-9  { background: linear-gradient(150deg, #5e5ce6, #3634d6 55%, #1d1b8f); }
