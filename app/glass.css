@@ -23,6 +23,8 @@
 
 /* ---------- 页面：浅色基底 + 柔和光斑（玻璃需要可折射的背景） ---------- */
 body { background: #e8ecf4; }
+/* 详情页无全局 Tab 栏，移除为其预留的底部内边距，由 dock-space 接管 */
+body.detail-mode { padding-bottom: 0; }
 body::before {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
@@ -50,7 +52,7 @@ body::before {
 
 /* ---------- 顶部导航 / 底部 Tab / 下载栏 ---------- */
 .navbar, .tabbar, .dock {
-  background: rgba(255, 255, 255, .55);
+  background: rgba(255, 255, 255, .85);
   -webkit-backdrop-filter: var(--lg-blur-strong);
   backdrop-filter: var(--lg-blur-strong);
   box-shadow: var(--lg-inner), var(--lg-drop-sm);
