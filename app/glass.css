@@ -15,8 +15,8 @@
   --lg-drop-sm: 0 6px 18px rgba(28, 38, 88, .12);
   --lg-inner:
     inset 0 1px 1px rgba(255, 255, 255, .95),
-    inset 0 0 0 .5px rgba(255, 255, .55),
-    inset 0 -10px 18px rgba(255, 255, .14);
+    inset 0 0 0 .5px rgba(255, 255, 255, .55),
+    inset 0 -10px 18px rgba(255, 255, 255, .14);
   --lg-blue: rgba(10, 132, 255, .78);
   --lg-amber: rgba(255, 159, 10, .8);
   --lg-indigo: rgba(94, 92, 230, .82);
@@ -100,10 +100,10 @@ body::before {
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
   color: #fff;
-  border: .5px solid rgba(255, 255, .45);
+  border: .5px solid rgba(255, 255, 255, .45);
   box-shadow:
-    inset 0 1px 1px rgba(255, 255, .6),
-    inset 0 0 0 .5px rgba(255, 255, .3),
+    inset 0 1px 1px rgba(255, 255, 255, .6),
+    inset 0 0 0 .5px rgba(255, 255, 255, .3),
     0 8px 22px rgba(10, 132, 255, .32);
   transition: transform .12s, background .15s;
 }
@@ -115,7 +115,7 @@ body::before {
   background: var(--lg-indigo);
   color: #fff;
   box-shadow:
-    inset 0 1px 1px rgba(255, 255, .6),
+    inset 0 1px 1px rgba(255, 255, 255, .6),
     0 8px 22px rgba(94, 92, 230, .3);
 }
 .get-btn.lock:active {
@@ -144,7 +144,7 @@ body::before {
 .chip.active {
   background: var(--lg-blue);
   color: #fff;
-  border: .5px solid rgba(255, 255, .45);
+  border: .5px solid rgba(255, 255, 255, .45);
   box-shadow: none;
 }
 
@@ -153,7 +153,7 @@ body::before {
   background: rgba(255, 255, 255, .6);
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
-  border: .5px solid rgba(255, 255, .7);
+  border: .5px solid rgba(255, 255, 255, .7);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, .06);
   transition: box-shadow .15s, background .15s;
 }
@@ -169,13 +169,13 @@ body::before {
 }
 .notice-icon {
   background: rgba(255, 159, 10, .3);
-  box-shadow: inset 0 1px 1px rgba(255, 255, .6);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .6);
 }
 
 /* ---------- 广告位图标 ---------- */
 .ad-icon {
   background: rgba(10, 132, 255, .2);
-  box-shadow: inset 0 1px 1px rgba(255, 255, .6);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .6);
 }
 
 /* ---------- 遮罩与底部弹层 ---------- */
@@ -188,7 +188,7 @@ body::before {
   background: rgba(255, 255, 255, .7);
   -webkit-backdrop-filter: var(--lg-blur-strong);
   backdrop-filter: var(--lg-blur-strong);
-  border: .5px solid rgba(255, 255, .65);
+  border: .5px solid rgba(255, 255, 255, .65);
   box-shadow: var(--lg-inner), 0 20px 50px rgba(20, 28, 70, .25);
 }
 .sheet-foot button { border: .5px solid transparent; }
@@ -199,7 +199,7 @@ body::before {
   background: rgba(28, 30, 38, .72);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border: .5px solid rgba(255, 255, .14);
+  border: .5px solid rgba(255, 255, 255, .14);
 }
 
 /* ---------- 彩色玻璃表面（渐变类 → 半透明 tint） ---------- */
@@ -212,8 +212,8 @@ body::before {
   border: .5px solid rgba(255, 255, 255, .4);
   text-shadow: 0 1px 2px rgba(0, 0, 0, .14);
   box-shadow:
-    inset 0 1px 1px rgba(255, 255, .55),
-    inset 0 0 0 .5px rgba(255, 255, .3),
+    inset 0 1px 1px rgba(255, 255, 255, .55),
+    inset 0 0 0 .5px rgba(255, 255, 255, .3),
     var(--lg-drop);
 }
 .grad-0 { background: linear-gradient(150deg, rgba(90,125,244,.66), rgba(123,82,214,.66) 60%, rgba(149,70,184,.66)); }
@@ -239,11 +239,11 @@ body::before {
 .tag {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border: .5px solid rgba(255, 255, .5);
-  box-shadow: inset 0 1px 1px rgba(255, 255, .55);
+  border: .5px solid rgba(255, 255, 255, .5);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .55);
 }
 .profile-avatar, .login-logo, .brand .mark {
-  border: .5px solid rgba(255, 255, .6);
+  border: .5px solid rgba(255, 255, 255, .6);
   box-shadow: var(--lg-inner), var(--lg-drop-sm);
 }
 .app-icon.ph, .feed-icon.ph, .related-icon.ph, .hero-icon.ph {
@@ -252,7 +252,7 @@ body::before {
 }
 
 /* 相关卡片点击玻璃高光 */
-.related-card:active { background: rgba(255, 255, .32); }
+.related-card:active { background: rgba(255, 255, 255, .32); }
 
 /* 表格保持通透 */
 .resp-table tr, .resp-table td { background: transparent; }
