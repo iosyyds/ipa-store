@@ -41,7 +41,7 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
   position: sticky; top: 0; z-index: 90;
   height: var(--nav-h);
   background: rgba(248, 248, 250, 0.82);
-  backdrop-filter: saturate(180()) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 0.5px solid var(--line);
 }
@@ -94,7 +94,7 @@ input, textarea, select { font-family: inherit; font-size: 16px; }
 .chip:active { transform: scale(0.94); }
 
 .section-head { display: flex; align-items: baseline; justify-content: space-between; margin: 20px 0 10px; }
-.section-head h2 { font-size: 20px; font-weight: 700; }
+.section-head h2 { font-size: 20px; font-weight: 700 }
 .section-head span { font-size: 12px; color: var(--text-3); }
 
 .app-list { background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; }
@@ -352,8 +352,7 @@ tr:last-child td { border-bottom: none; }
 .sheet {
   width: 100%; max-width: 520px;
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: saturate(180%) blur(26px);
-  -webkit-backdrop-filter: saturate(180%) blur(26px);
+  backdrop-filter: saturate(180%) blur(26px); -webkit-backdrop-filter: saturate(180%) blur(26px);
   border: 0.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 22px 22px 0 0;
   box-shadow: var(--shadow-lg);
