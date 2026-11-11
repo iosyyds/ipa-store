@@ -152,6 +152,14 @@ function DetailInner() {
         <div className="detail-hero grad-0">
           <button
             type="button"
+            className="hero-back"
+            onClick={back}
+            aria-label="返回"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <button
+            type="button"
             className={'hero-share' + (shareDone ? ' done' : '')}
             onClick={onShare}
             aria-label="分享"
@@ -246,10 +254,6 @@ function DetailInner() {
           </button>
         </div>
       </div>
-
-      <button className="back-fab" onClick={back} aria-label="返回">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
-      </button>
     </>
   );
 }
