@@ -22,7 +22,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  font-family: -apple-system, BlinkSystemFont, 'PingFang SC', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue',
     'Microsoft YaHei', 'Segoe UI', sans-serif;
   color: var(--text);
   background: var(--bg);
@@ -376,7 +376,7 @@ tr:last-child td { border-bottom: none; }
 }
 .sheet {
   width: 100%; max-width: 520px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 0.72);
   backdrop-filter: saturate(180%) blur(26px);
   -webkit-backdrop-filter: saturate(180%) blur(26px);
   border: 0.5px solid rgba(255, 255, 255, 0.6);
@@ -415,7 +415,7 @@ tr:last-child td { border-bottom: none; }
   .login-wrap { min-height: 70vh; }
   .mask { align-items: center; }
   .sheet { border-radius: 22px; }
-  @keyframes slide-up { from { opacity: 16px; } }
+  @keyframes slide-up { from { opacity: 0; transform: translateY(16px); } }
   .dock { bottom: 0; }
   .profile-grid { grid-template-columns: repeat(2, 1fr); }
 }
