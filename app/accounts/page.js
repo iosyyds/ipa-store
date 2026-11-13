@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isLoggedIn } from '@/lib/auth';
+import { API } from '@/lib/api';
+import { isLoggedIn, clearSession } from '@/lib/auth';
 
 const SITES = [
   {
@@ -31,19 +32,77 @@ const SITES = [
   },
 ];
 
+// 任意一张有效授权即可：状态正常且未过期
+function isValidLicense(l) {
+  if (Number(l.status) !== 1) return false;
+  if (l.expires_at && new Date(l.expires_at).getTime() < Date.now()) return false;
+  return true;
+}
+
 export default function AccountsPage() {
   const router = useRouter();
-  const [ready, setReady] = useState(false);
+  // loading：校验中；locked：已登录但无有效授权；ready：已授权可看
+  const [phase, setPhase] = useState('loading');
 
   useEffect(() => {
     if (!isLoggedIn()) {
       router.replace('/login?redirect=' + encodeURIComponent('/accounts'));
       return;
     }
-    setReady(true);
+    let alive = true;
+    (async () => {
+      try {
+        const lic = await API.user.licenses();
+        if (!alive) return;
+        const ok = Array.isArray(lic) && lic.some(isValidLicense);
+        setPhase(ok ? 'ready' : 'locked');
+      } catch (e) {
+        if (!alive) return;
+        // 登录态失效：清掉过期令牌并回到登录页
+        if (e.status === 401 || e.code === 401) {
+          clearSession();
+          router.replace('/login?redirect=' + encodeURIComponent('/accounts'));
+          return;
+        }
+        setPhase('locked');
+      }
+    })();
+    return () => { alive = false; };
   }, [router]);
 
-  if (!ready) return <div className="empty">加载中…</div>;
+  if (phase === 'loading') return <div className="empty">加载中…</div>;
+
+  if (phase === 'locked') {
+    return (
+      <div className="accounts-wrap">
+        <div className="account-lock">
+          <span className="account-lock-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2.5" />
+              <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+              <circle cx="12" cy="15.5" r="1.4" />
+              <path d="M12 16.9v1.6" />
+            </svg>
+          </span>
+          <h2 className="account-lock-title">该内容需要授权</h2>
+          <p className="account-lock-desc">
+            你还没有有效授权码，兑换后即可查看小火箭共享账号。
+          </p>
+          <div className="account-lock-actions">
+            <button
+              className="btn btn-primary"
+              onClick={() => router.push('/user?redirect=' + encodeURIComponent('/accounts'))}
+            >
+              去兑换授权码
+            </button>
+            <button className="btn btn-ghost" onClick={() => router.push('/')}>
+              返回首页
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="accounts-wrap">
