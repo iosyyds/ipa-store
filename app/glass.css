@@ -324,6 +324,12 @@ body::before {
   display: flex; align-items: center; gap: 13px;
   padding: 14px 16px; margin-bottom: 16px;
   cursor: pointer;
+  border-radius: 18px;
+  background: var(--lg-fill-2);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: var(--lg-rim);
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
   transition: transform .12s, background .15s;
 }
 .account-entry:active { transform: scale(.98); background: var(--lg-fill-3); }
