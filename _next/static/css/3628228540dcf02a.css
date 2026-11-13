@@ -1175,7 +1175,7 @@ body::before {
   border: .5px solid rgba(255, 159, 10, .32);
   -webkit-backdrop-filter: var(--lg-blur);
   backdrop-filter: var(--lg-blur);
-  box-shadow: inset 0 1px 1px rgba(255, 255, .5);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5);
 }
 .account-warn-icon { flex: none; display: flex; color: #ff9500; }
 .account-warn-icon svg { width: 21px; height: 21px; }
