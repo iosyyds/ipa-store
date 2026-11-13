@@ -68,7 +68,7 @@ export default function HomePage() {
   function onSearchInput(v) {
     setSearch(v);
     clearTimeout(timerRef.current);
-    timerRef.current setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setKeyword(v.trim());
       setPage(1);
     }, 450);
