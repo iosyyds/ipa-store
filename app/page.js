@@ -68,7 +68,7 @@ export default function HomePage() {
   function onSearchInput(v) {
     setSearch(v);
     clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => {
+    timerRef.current setTimeout(() => {
       setKeyword(v.trim());
       setPage(1);
     }, 450);
@@ -127,6 +127,24 @@ export default function HomePage() {
             {c.name}
           </button>
         ))}
+      </div>
+
+      <div className="account-entry home-rocket" onClick={() => router.push('/accounts')}>
+        <span className="account-entry-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2c2.2 2.4 3.4 5.2 3.4 8.2 0 1.6-.4 3-1 4.2l4.4 2.6a1 1 0 0 1 .1 1.7l-4.9 2.9a1 1 0 0 1-1.5-.8V9.5" />
+            <path d="M12 2C9.8 4.4 8.6 7.2 8.6 10.2c0 1.6.4 3 1 4.2l-4.4 2.6a1 1 0 0 0-.1 1.7l4.9 2.9a1 1 0 0 0 1.5-.8V9.5" />
+          </svg>
+        </span>
+        <span className="account-entry-body">
+          <span className="account-entry-name">小火箭共享账号</span>
+          <span className="account-entry-desc">登录并授权后查看精选共享账号站</span>
+        </span>
+        <span className="account-entry-chevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </span>
       </div>
 
       <NoticeBar text={notice} />
