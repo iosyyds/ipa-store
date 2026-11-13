@@ -234,7 +234,7 @@ body::before {
 .cat-grad-6  { background: linear-gradient(150deg, rgba(255,100,130,.62), rgba(255,55,95,.62) 55%, rgba(215,0,21,.62)); }
 .cat-grad-7  { background: linear-gradient(150deg, rgba(100,210,255,.62), rgba(10,132,255,.62) 55%, rgba(0,64,223,.62)); }
 .cat-grad-8  { background: linear-gradient(150deg, rgba(255,214,10,.64), rgba(255,159,10,.64) 55%, rgba(255,107,0,.64)); }
-.cat-grad-9  { background: linear-gradient(150deg, rgba(94,92,230,.62), rgba(54,52,214,.62) 55%, rgba(29,27,143,.62)); }
+.cat-grad-9  { background: linear-gradient(150deg, rgba(94,92,230,.62), rgba(54,52,143,.62) 55%, rgba(29,27,143,.62)); }
 .cat-grad-10 { background: linear-gradient(150deg, rgba(43,212,199,.62), rgba(30,166,166,.62) 55%, rgba(15,123,117,.62)); }
 .cat-grad-11 { background: linear-gradient(150deg, rgba(255,158,166,.62), rgba(242,92,138,.62) 55%, rgba(184,58,120,.62)); }
 
@@ -262,3 +262,84 @@ body::before {
 
 /* 下载记录「加载更多」容器 */
 .table-more { text-align: center; padding: 14px 0 18px; }
+
+/* ============================================================
+   小火箭共享账号页（登录后可见）
+   ============================================================ */
+.accounts-wrap { max-width: 720px; margin: 0 auto; padding: 22px 20px 104px; }
+.accounts-title { font-size: 30px; font-weight: 800; letter-spacing: -.6px; margin: 0; }
+.accounts-sub { font-size: 13.5px; color: var(--text-2); margin: 6px 0 18px; }
+
+/* 防广告警告：克制的琥珀玻璃卡 */
+.account-warn {
+  display: flex; align-items: center; gap: 11px;
+  padding: 13px 15px; margin-bottom: 18px;
+  border-radius: 16px;
+  background: rgba(255, 159, 10, .14);
+  border: .5px solid rgba(255, 159, 10, .32);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5);
+}
+.account-warn-icon { flex: none; display: flex; color: #ff9500; }
+.account-warn-icon svg { width: 21px; height: 21px; }
+.account-warn-text { font-size: 14px; font-weight: 700; line-height: 1.35; color: #92400e; }
+
+/* 外站链接：独立玻璃卡 */
+.account-list { display: flex; flex-direction: column; gap: 12px; }
+.account-row {
+  display: flex; align-items: center; gap: 13px;
+  padding: 13px 15px;
+  border-radius: 18px;
+  background: var(--lg-fill-2);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+  border: var(--lg-rim);
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
+  transition: transform .12s, background .15s;
+}
+.account-row:active { transform: scale(.98); background: var(--lg-fill-3); }
+.account-row-icon {
+  flex: none; width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px;
+  color: var(--blue);
+  background: rgba(10, 132, 255, .13);
+}
+.account-row-icon svg { width: 22px; height: 22px; }
+.account-row-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.account-row-name {
+  font-size: 15px; font-weight: 700; color: var(--text-1);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.account-row-desc {
+  font-size: 12px; color: var(--text-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.account-row-chevron { flex: none; display: flex; color: var(--text-3); }
+.account-row-chevron svg { width: 17px; height: 17px; }
+
+/* 「我的」页入口卡片 */
+.account-entry {
+  display: flex; align-items: center; gap: 13px;
+  padding: 14px 16px; margin-bottom: 16px;
+  cursor: pointer;
+  transition: transform .12s, background .15s;
+}
+.account-entry:active { transform: scale(.98); background: var(--lg-fill-3); }
+.account-entry-icon {
+  flex: none; width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px;
+  color: var(--blue);
+  background: rgba(10, 132, 255, .13);
+}
+.account-entry-icon svg { width: 23px; height: 23px; }
+.account-entry-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.account-entry-name { font-size: 15px; font-weight: 700; color: var(--text-1); }
+.account-entry-desc {
+  font-size: 12px; color: var(--text-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.account-entry-chevron { flex: none; display: flex; color: var(--text-3); }
+.account-entry-chevron svg { width: 17px; height: 17px; }
