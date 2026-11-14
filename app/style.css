@@ -361,7 +361,7 @@ tr:last-child td { border-bottom: none; }
 .mono { font-family: 'SF Mono', Menlo, monospace; }
 
 /* ============ 底部浮动 Tab Bar（XySign 风格，5 项，中间凸起） ============ */
-body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
+/* 底部 Tab 避让统一由 body 的 padding-bottom 负责（见文件开头），此处不再重复 */
 
 .tabbar {
   position: fixed;
@@ -481,7 +481,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 /* ============================================================
    Today Feed（App Store 今日页风格）
    ============================================================ */
-.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 104px; }
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
 /* 日期 + Today 大标题 */
 .today-date { color: var(--blue); font-size: 13px; font-weight: 700; margin-top: 24px; letter-spacing: .2px; }
@@ -571,7 +571,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 .feed-view:active { transform: scale(.94); }
 
 /* 空状态 / 加载更多 */
-.today-more { text-align: center; margin: 8px 0 28px; }
+.today-more { text-align: center; margin: 8px 0 0; }
 .more-btn {
   padding: 11px 30px; border-radius: 980px;
   background: #fff; color: var(--blue); font-size: 14px; font-weight: 700;
@@ -616,7 +616,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 /* ============================================================
    类别页（App Store 分类网格）
    ============================================================ */
-.cat-page { max-width: 720px; margin: 0 auto; padding: 0 20px 110px; }
+.cat-page { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 .cat-page-head { padding: 26px 0 18px; }
 .cat-page-head h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
 .cat-page-head p { color: var(--text-2); font-size: 15px; margin-top: 4px; }
@@ -651,7 +651,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 /* ============================================================
    分类内页
    ============================================================ */
-.cat-detail { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; }
+.cat-detail { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 .cat-detail-head { padding: 24px 0 16px; }
 .cat-detail-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
 .cat-detail-head p { color: var(--text-2); font-size: 14px; margin-top: 4px; }

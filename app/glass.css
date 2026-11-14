@@ -220,7 +220,7 @@ body.detail-mode { padding-bottom: 0; }
 /* ============================================================
    小火箭共享账号页（登录后可见）
    ============================================================ */
-.accounts-wrap { max-width: 720px; margin: 0 auto; padding: 22px 20px 104px; }
+.accounts-wrap { max-width: 720px; margin: 0 auto; padding: 22px 20px 0; }
 .accounts-title { font-size: 30px; font-weight: 800; letter-spacing: -.6px; margin: 0; }
 .accounts-sub { font-size: 13.5px; color: var(--text-2); margin: 6px 0 18px; }
 

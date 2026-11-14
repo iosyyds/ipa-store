@@ -5,7 +5,7 @@
  * ============================================================ */
 
 /* ---------- 版心 ---------- */
-.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 104px; }
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
 /* ---------- 标题区 ---------- */
 .today-date { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .2px; margin-top: 28px; }
@@ -203,7 +203,7 @@
 .today-empty { text-align: center; padding: 64px 20px; color: var(--text-3); }
 
 /* ---------- 分类内页 ---------- */
-.cat-detail { padding-bottom: 40px; }
+/* 底部 Tab 避让统一由 body 负责，cat-detail 不再单独留底部 padding */
 .cat-detail-head { padding: 14px 0 20px; }
 .cat-detail-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.5px; line-height: 1.15; }
 .cat-detail-head p { color: var(--text-2); font-size: 13px; margin-top: 6px; }
@@ -222,7 +222,7 @@
 
 /* ---------- 桌面端 ---------- */
 @media (min-width: 700px) {
-  .today-wrap { padding: 0 24px 40px; }
+  .today-wrap { padding: 0 24px; }
   .today-big { font-size: 40px; }
   .cat-nav { display: none; }
   .cat-detail-head { padding-top: 28px; }
