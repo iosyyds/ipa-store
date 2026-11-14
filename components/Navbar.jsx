@@ -15,11 +15,16 @@ export default function Navbar() {
           <span className="mark">
             <img src="/favicon.svg" alt="甜甜-IPA应用库" />
           </span>
-          <span>甜甜-IPA应用库</span>
+          <span className="brand-text">
+            <span className="brand-name">甜甜-IPA应用库</span>
+            <span className="brand-sub">IPA · SIGN · INSTALL</span>
+          </span>
         </Link>
         <div className="nav-links">
           <Link href="/">首页</Link>
           <Link href="/categories">分类</Link>
+          <Link href="/accounts">小火箭</Link>
+          <Link href="/sign">签名</Link>
           <Link href="/user">{loggedIn ? '我的' : '登录'}</Link>
         </div>
       </div>
