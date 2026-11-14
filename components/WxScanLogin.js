@@ -73,7 +73,18 @@ export default function WxScanLogin({ redirect = '/' }) {
       <div className="wxscan-box">
         {phase === 'loading' && <div className="wxscan-loading">正在生成二维码…</div>}
         {phase === 'waiting' && qr &&
-          <img className="wxscan-qr" src={qr} width={200} height={200} alt="微信扫码登录" />}
+          <img
+            className="wxscan-qr"
+            src={qr}
+            width={200}
+            height={200}
+            alt="微信扫码登录"
+            onError={() => {
+              if (stoppedRef.current) return;
+              setPhase('error');
+              setErr('二维码加载失败，请检查网络或点击重试');
+            }}
+          />}
         {(phase === 'expired' || phase === 'error') && (
           <button type="button" className="btn btn-ghost wxscan-refresh" onClick={start}>
             {phase === 'expired' ? '二维码已过期，点击刷新' : (err || '点击重试')}
