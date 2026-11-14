@@ -291,7 +291,7 @@
           profile: () => i("/user/profile"),
           licenses: () => i("/user/licenses"),
           logs: () => i("/user/logs"),
-          redeem: (e) => i("/user/redeem", { method: "POST", body: JSON.stringify({ code: e) }),
+          redeem: (e) => i("/user/redeem", { method: "POST", body: JSON.stringify({ code: e }) }),
           password: (e) => i("/user/change-password", { method: "POST", body: JSON.stringify(e) }),
           appToken: (e) => i("/user/apps/" + encodeURIComponent(e) + "/token", { method: "POST" }),
         },
