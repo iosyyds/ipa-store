@@ -362,7 +362,7 @@ tr:last-child td { border-bottom: none; }
 .mono { font-family: 'SF Mono', Menlo, monospace; }
 
 /* ============ 底部浮动 Tab Bar（XySign 风格，5 项，中间凸起） ============ */
-body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
+/* 底部 Tab 避让统一由 body 的 padding-bottom 负责（见文件开头），此处不再重复 */
 
 .tabbar {
   position: fixed;
@@ -482,7 +482,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 /* ============================================================
    Today Feed（App Store 今日页风格）
    ============================================================ */
-.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 104px; }
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
 /* 日期 + Today 大标题 */
 .today-date { color: var(--blue); font-size: 13px; font-weight: 700; margin-top: 24px; letter-spacing: .2px; }
@@ -572,7 +572,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 .feed-view:active { transform: scale(.94); }
 
 /* 空状态 / 加载更多 */
-.today-more { text-align: center; margin: 8px 0 28px; }
+.today-more { text-align: center; margin: 8px 0 0; }
 .more-btn {
   padding: 11px 30px; border-radius: 980px;
   background: #fff; color: var(--blue); font-size: 14px; font-weight: 700;
@@ -617,7 +617,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 /* ============================================================
    类别页（App Store 分类网格）
    ============================================================ */
-.cat-page { max-width: 720px; margin: 0 auto; padding: 0 20px 110px; }
+.cat-page { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 .cat-page-head { padding: 26px 0 18px; }
 .cat-page-head h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
 .cat-page-head p { color: var(--text-2); font-size: 15px; margin-top: 4px; }
@@ -652,7 +652,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 /* ============================================================
    分类内页
    ============================================================ */
-.cat-detail { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; }
+.cat-detail { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 .cat-detail-head { padding: 24px 0 16px; }
 .cat-detail-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
 .cat-detail-head p { color: var(--text-2); font-size: 14px; margin-top: 4px; }
@@ -708,7 +708,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
  * ============================================================ */
 
 /* ---------- 版心 ---------- */
-.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 104px; }
+.today-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
 /* ---------- 标题区 ---------- */
 .today-date { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .2px; margin-top: 28px; }
@@ -906,7 +906,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 .today-empty { text-align: center; padding: 64px 20px; color: var(--text-3); }
 
 /* ---------- 分类内页 ---------- */
-.cat-detail { padding-bottom: 40px; }
+/* 底部 Tab 避让统一由 body 负责，cat-detail 不再单独留底部 padding */
 .cat-detail-head { padding: 14px 0 20px; }
 .cat-detail-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.5px; line-height: 1.15; }
 .cat-detail-head p { color: var(--text-2); font-size: 13px; margin-top: 6px; }
@@ -925,7 +925,7 @@ body { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 
 /* ---------- 桌面端 ---------- */
 @media (min-width: 700px) {
-  .today-wrap { padding: 0 24px 40px; }
+  .today-wrap { padding: 0 24px; }
   .today-big { font-size: 40px; }
   .cat-nav { display: none; }
   .cat-detail-head { padding-top: 28px; }
@@ -1158,7 +1158,7 @@ body.detail-mode { padding-bottom: 0; }
 /* ============================================================
    小火箭共享账号页（登录后可见）
    ============================================================ */
-.accounts-wrap { max-width: 720px; margin: 0 auto; padding: 22px 20px 104px; }
+.accounts-wrap { max-width: 720px; margin: 0 auto; padding: 22px 20px 0; }
 .accounts-title { font-size: 30px; font-weight: 800; letter-spacing: -.6px; margin: 0; }
 .accounts-sub { font-size: 13.5px; color: var(--text-2); margin: 6px 0 18px; }
 
