@@ -1274,3 +1274,27 @@ body::before {
 .account-lock-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
 .account-lock-actions .btn { width: 100%; }
 
+/* ============================================================
+   微信小程序扫码登录（登录页内）
+   ============================================================ */
+.wxscan { margin-top: 24px; }
+.wxscan-divider {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--text-2); font-size: 12.5px; font-weight: 600;
+}
+.wxscan-divider::before, .wxscan-divider::after {
+  content: ''; flex: 1 1; height: 1px; background: rgba(60, 70, 90, .14);
+}
+.wxscan-box {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px; margin: 16px 0 10px;
+}
+.wxscan-qr {
+  width: 200px; height: 200px; border-radius: 16px;
+  background: #fff; padding: 8px;
+  box-shadow: var(--lg-inner), var(--lg-drop-sm);
+}
+.wxscan-loading { font-size: 13px; color: var(--text-2); }
+.wxscan-refresh { width: 100%; padding: 12px; }
+.wxscan-tip { margin: 0; text-align: center; font-size: 12px; color: var(--text-3); }
+
