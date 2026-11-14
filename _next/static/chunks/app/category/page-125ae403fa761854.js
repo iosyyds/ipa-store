@@ -343,7 +343,7 @@
         s.o(r, "useSearchParams") &&
           s.d(t, {
             useSearchParams: function () {
-              return s.useSearchParams;
+              return r.useSearchParams;
             },
           }));
     },
