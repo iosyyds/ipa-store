@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /assets/js/
-
-Sitemap: https://iosyyds.github.io/ipa-store/sitemap.xml
