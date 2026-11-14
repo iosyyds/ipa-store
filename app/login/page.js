@@ -3,6 +3,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { doLogin, doRegister } from '@/lib/auth';
 import { useToast } from '@/components/ToastProvider';
+import WxScanLogin from '@/components/WxScanLogin';
 
 function LoginInner() {
   const router = useRouter();
@@ -125,6 +126,8 @@ function LoginInner() {
             </button>
           </form>
         )}
+
+        <WxScanLogin redirect={redirect} />
 
         {!registerOpen && (
           <div className="muted" style={{ fontSize: 12, textAlign: 'center', marginTop: 14 }}>
