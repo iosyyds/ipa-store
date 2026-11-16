@@ -1,13 +1,17 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { QRCodeSVG } from 'qrcode.react';
 import { API } from '@/lib/api';
 import { acceptWxSession } from '@/lib/auth';
 
-// 微信小程序扫码登录：建票 → 展示小程序码 → 轮询 → 确认后建立会话
+// 扫码登录（免备案）：建票 → 前端本地生成普通二维码（内容为 ticket）
+// → 小程序内「扫码登录」扫一扫 → confirm 绑定微信身份 → 轮询确认后建立会话
+const QR_PREFIX = 'TTSCAN:';
+
 export default function WxScanLogin({ redirect = '/' }) {
   const router = useRouter();
-  const [qr, setQr] = useState('');
+  const [ticket, setTicket] = useState('');
   const [phase, setPhase] = useState('loading'); // loading / waiting / expired / error
   const [err, setErr] = useState('');
 
@@ -48,11 +52,11 @@ export default function WxScanLogin({ redirect = '/' }) {
   async function start() {
     stop();
     stoppedRef.current = false;
-    setPhase('loading'); setErr(''); setQr('');
+    setPhase('loading'); setErr(''); setTicket('');
     try {
       const t = await API.wxTicket();
       if (stoppedRef.current) return;
-      setQr(API.wxQrUrl(t.qr));
+      setTicket(t.ticket);
       setPhase('waiting');
       schedule(t.ticket, 1500);
     } catch (e) {
@@ -72,26 +76,25 @@ export default function WxScanLogin({ redirect = '/' }) {
       <div className="wxscan-divider"><span>微信扫码登录</span></div>
       <div className="wxscan-box">
         {phase === 'loading' && <div className="wxscan-loading">正在生成二维码…</div>}
-        {phase === 'waiting' && qr &&
-          <img
-            className="wxscan-qr"
-            src={qr}
-            width={200}
-            height={200}
-            alt="微信扫码登录"
-            onError={() => {
-              if (stoppedRef.current) return;
-              setPhase('error');
-              setErr('二维码加载失败，请检查网络或点击重试');
-            }}
-          />}
+        {phase === 'waiting' && ticket && (
+          <div className="wxscan-qr-wrap">
+            <QRCodeSVG
+              value={QR_PREFIX + ticket}
+              size={200}
+              level="M"
+              bgColor="#ffffff"
+              fgColor="#000000"
+              includeMargin={false}
+            />
+          </div>
+        )}
         {(phase === 'expired' || phase === 'error') && (
           <button type="button" className="btn btn-ghost wxscan-refresh" onClick={start}>
             {phase === 'expired' ? '二维码已过期，点击刷新' : (err || '点击重试')}
           </button>
         )}
       </div>
-      <p className="wxscan-tip">打开微信「扫一扫」，在小程序内确认登录</p>
+      <p className="wxscan-tip">先在微信中打开「甜甜」小程序，点击首页「扫码登录」扫描此二维码</p>
     </div>
   );
 }
