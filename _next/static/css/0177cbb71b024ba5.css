@@ -1283,12 +1283,14 @@ body.detail-mode { padding-bottom: 0; }
   display: flex; align-items: center; justify-content: center;
   min-height: 200px; margin: 16px 0 10px;
 }
-.wxscan-qr {
-  width: 200px; height: 200px; border-radius: 16px;
-  background: #fff; padding: 8px;
+.wxscan-qr-wrap {
+  border-radius: 16px;
+  background: #fff; padding: 10px;
   border: 1px solid var(--card-border);
   box-shadow: var(--ios-shadow-sm);
+  line-height: 0;
 }
+.wxscan-qr-wrap svg { display: block; }
 .wxscan-loading { font-size: 13px; color: var(--text-2); }
 .wxscan-refresh { width: 100%; padding: 12px; }
 .wxscan-tip { margin: 0; text-align: center; font-size: 12px; color: var(--text-3); }
